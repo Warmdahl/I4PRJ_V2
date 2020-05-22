@@ -207,7 +207,7 @@ export class BorgerVisning extends Component {
 
         const statushist = this.state.borger.progressReports;
         this.setState({ statusDate: new Date(statushist[statushist.length - 1].date) });
-
+        //Ændring
     }
 
 }
