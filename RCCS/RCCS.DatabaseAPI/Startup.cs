@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,11 +10,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using RCCS.DatabaseCitizenResidency.Data;
 using RCCS.DatabaseUsers.Data;
+using RCCS.DatabaseUsers.Utilities;
 
 namespace RCCS.DatabaseAPI
 {
@@ -29,6 +33,8 @@ namespace RCCS.DatabaseAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddCors();
             services.AddDbContext<RCCSContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<RCCSUsersContext>(options =>
@@ -44,6 +50,32 @@ namespace RCCS.DatabaseAPI
                     Description = "ASP.NET Core Web API for RCCS.DatabaseCitizenResidency and RCCS.DatabaseUsers"
                 });
             });
+
+
+        // configure strongly typed settings objects
+        var appSettingsSection = Configuration.GetSection("AppSettings");
+        services.Configure<AppSettings>(appSettingsSection);
+
+        // configure jwt authentication
+        var appSettings = appSettingsSection.Get<AppSettings>();
+        var key = Encoding.ASCII.GetBytes(appSettings.SecretKey);
+        services.AddAuthentication(x =>
+        {
+            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(x =>
+        {
+            x.RequireHttpsMetadata = false;
+            x.SaveToken = true;
+            x.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+        });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,14 +106,12 @@ namespace RCCS.DatabaseAPI
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            DataSeederUsers.SeedUsers(usersContext);
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            DataSeederUsers.SeedUsers(usersContext);
         }
     }
 }

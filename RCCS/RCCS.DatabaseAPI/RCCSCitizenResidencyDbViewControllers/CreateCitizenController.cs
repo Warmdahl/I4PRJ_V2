@@ -111,5 +111,60 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
         {
             return _context.Citizens.Any(e => e.CPR == id);
         }
+
+        
+        [HttpPut]
+        public async Task<ActionResult<Citizen>> PutCitizen(CreateCitizenViewModel ccvm)
+        {
+
+            var existingCitizen = await _context.Citizens
+                .Include(c => c.Relatives)
+                .Include(c => c.ResidenceInformation)
+                .Include(c => c.CitizenOverview)
+                .Include(c => c.RespiteCareRoom)
+                    .ThenInclude(c => c.RespiteCareHome)
+                .Where(c => c.CPR == ccvm.CPR)
+                .FirstOrDefaultAsync<Citizen>();
+
+            if (existingCitizen != null)
+            {
+                //Citizen
+                existingCitizen.FirstName = ccvm.FirstName;
+                existingCitizen.LastName = ccvm.LastName;
+                existingCitizen.CPR = existingCitizen.CPR; //Do not change CPR
+
+                //only implementation for one relative
+                foreach (var relative in existingCitizen.Relatives)
+                {
+                    //Relative
+                    relative.FirstName = ccvm.RelativeFirstName;
+                    relative.LastName = ccvm.RelativeLastName;
+                    relative.PhoneNumber = ccvm.PhoneNumber;
+                    relative.Relation = ccvm.Relation;
+                    relative.IsPrimary = ccvm.IsPrimary;
+                }
+
+                //Residence information
+                existingCitizen.ResidenceInformation.StartDate = ccvm.StartDate;
+                existingCitizen.ResidenceInformation.ReevaluationDate = ccvm.ReevaluationDate;
+                existingCitizen.ResidenceInformation.PlannedDischargeDate = ccvm.PlannedDischargeDate;
+                existingCitizen.ResidenceInformation.ProspectiveSituationStatusForCitizen = ccvm.ProspectiveSituationStatusForCitizen;
+
+                //CitizenOverview
+                existingCitizen.CitizenOverview.CareNeed = ccvm.CareNeed;
+                existingCitizen.CitizenOverview.PurposeOfStay = ccvm.PurposeOfStay;
+
+                _context.SaveChanges();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
     }
+
+   
 }

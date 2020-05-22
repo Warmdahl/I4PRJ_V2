@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>RCCS.DatabaseCitizenResidency</AssemblyName>
     <RootNamespace>RCCS.DatabaseCitizenResidency</RootNamespace>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
