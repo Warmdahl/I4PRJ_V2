@@ -17,11 +17,6 @@ export class BorgerVisning extends Component {
         this.populateBorgerData();
     }
 
-    //DateObjectification()
-    //{
-    //    const statushist = this.state.borger.statusHistories;
-    //    this.setState({ statusDate: new Date(statushist[0].date) });
-    //}
 
     static borgertabel(borger, cpr, statusDate, admissiondate, evaluationdate) {
         const relatives = borger.relatives;
@@ -171,25 +166,6 @@ export class BorgerVisning extends Component {
     }
 
 
-
-    //static relativestable(borger) {
-    //    const relatives = borger.relatives;
-    //    return (
-    //        <table className="table table-striped">
-    //            <tbody>
-    //                {relatives.map(relative =>
-    //                    <tr>
-    //                        <td>{relative.isPrimary}</td>
-    //                        <td>{relative.firstName}</td>
-    //                        <td>{relative.lastName}</td>
-    //                        <td>{relative.phoneNumber}</td>
-    //                        <td>{relative.relation}</td>
-    //                    </tr>
-    //                )}
-    //            </tbody>
-    //        </table>
-    //    );
-    //}
 
 
 
