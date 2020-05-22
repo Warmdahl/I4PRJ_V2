@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RCCS.DatabaseCitizenResidency.Data;
 using RCCS.DatabaseCitizenResidency.ViewModel;
 
-namespace RCCS.DatabaseAPI.RCCSDbViewControllers
+namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]
+    [Authorize]
     public class CitizenListController : ControllerBase
     {
         private readonly RCCSContext _context;
@@ -24,7 +26,7 @@ namespace RCCS.DatabaseAPI.RCCSDbViewControllers
         {
             List<CitizenListViewModel> clvmList = new List<CitizenListViewModel>();
 
-            var citizens 
+            var citizens
                 = await _context.Citizens
                     .AsNoTracking()
                     .Include(c => c.ResidenceInformation)
@@ -32,7 +34,7 @@ namespace RCCS.DatabaseAPI.RCCSDbViewControllers
                     .ToListAsync();
 
             foreach (var citizen in citizens)
-            { 
+            {
                 var currentDate = DateTime.Now;
                 var dischargeDate = citizen.ResidenceInformation.PlannedDischargeDate;
                 var dischargeTimeSpan = dischargeDate - currentDate;
@@ -42,7 +44,7 @@ namespace RCCS.DatabaseAPI.RCCSDbViewControllers
                 if (daysUntilDiscarge < 0)
                 {
                     timeUntilDiscarge = "Udskrevet";
-                } 
+                }
                 else if (daysUntilDiscarge < 7)
                 {
                     timeUntilDiscarge = daysUntilDiscarge + " dage";

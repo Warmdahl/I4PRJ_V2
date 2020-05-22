@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
-import { Link, Route } from "react-router-dom";
-import { Label } from "reactstrap";
-//import axios from 'axios';
+import { Link } from "react-router-dom";
+import '../CSS/StyleSheet.css';
+import { Button } from 'reactstrap';
 
 
-export class OpdaterBorger extends Component {
+
+export class OpdaterBorger extends React.Component {
     static displayName = OpdaterBorger.name;
 
     constructor(props) {
         super(props);
         let url = window.location.pathname.split("/");
         this.state = {
-            borger: [], cpr: url[2], FirstName: "", lastName: "Test", relativeFirstName: "",
+            borger: [], cpr: url[2], type: props.type, home: props.home, FirstName: "", lastName: "Test", relativeFirstName: "",
             relativeLastName: "", relativePhonenumber: 1, relativeRelation: "", relativeIsPrimary: true,
             startDate: null, reevaluationDate: null, plannedDischarge: null, prospectiveSituation: "test",
-            careNeed: "", purposeOfStay: "", currentStatus: "", numberOfReevlaluations: 0
+            careNeed: "", purposeOfStay: ""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChangeCpr = this.handleChangeCpr.bind(this);
         this.handleChangeFirstname = this.handleChangeFirstname.bind(this);
         this.handleChangeLastname = this.handleChangeLastname.bind(this);
         this.handleChangeStartdato = this.handleChangeStartdato.bind(this);
         this.handleChangeCareNeed = this.handleChangeCareNeed.bind(this);
-        this.handleChangeCurrentStatus = this.handleChangeCurrentStatus.bind(this);
         this.handleChangePlannedDischarge = this.handleChangePlannedDischarge.bind(this);
         this.handleChangePurposeOfStay = this.handleChangePurposeOfStay.bind(this);
         this.handleChangeReevalutationDate = this.handleChangeReevalutationDate.bind(this);
@@ -36,14 +35,25 @@ export class OpdaterBorger extends Component {
 
     componentDidMount() {
         this.populateBorgerData();
+        let temp = 0
+        if (this.props.location.state.type === "Demensbolig") {
+            temp = 1
+        }
+        this.setState({
+            type: temp,
+            home: this.props.location.state.name
+            //firstName: this.state.borger[0].firstName
+        })
+        
     }
 
     handleSubmit(event) {
-        var url = "https://localhost:44356/api/Citizen"
+        //console.log(this.state.borger.firstName);
+        var url = "https://localhost:44356/rccsdb/createcitizen"
         event.preventDefault();
         fetch(url, {
-            method: 'POST',
-            //credentials: 'include',
+            method: 'PUT',
+            credentials: 'include',
             body: JSON.stringify({
                 "firstName": this.state.FirstName,
                 "lastName": this.state.lastName,
@@ -59,11 +69,11 @@ export class OpdaterBorger extends Component {
                 "prospectiveSituationStatusForCitizen": this.state.prospectiveSituation,
                 "careNeed": this.state.careNeed,
                 "purposeOfStay": this.state.purposeOfStay,
-                "currentStatus": this.state.currentStatus,
-                "numberOfReevaluations": Number(this.state.numberOfReevlaluations)
+                "respiteCareHomeName": this.state.home,
+                "type": Number(this.state.type)
             }),
             headers: {
-                //'Authorization': 'Bearer' + localStorage.getItem("token"),
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
                 'Content-Type': 'application/json'
             }
         }).then(responseJson => {
@@ -71,11 +81,6 @@ export class OpdaterBorger extends Component {
         })
             .catch(error => { alert("fejl" + error); });
     }
-
-    /*se(e) {
-        e.preventDefault();
-        alert(this.state.relativeIsPrimary)
-    }*/
 
     handleChangeFirstname = (event) => {
         this.setState({ FirstName: event.target.value });
@@ -87,10 +92,6 @@ export class OpdaterBorger extends Component {
 
     }
 
-    handleChangeCpr(event) {
-        this.setState({ cpr: event.target.value });
-    }
-
     handleChangeRelativeFirstName(event) {
         this.setState({ relativeFirstName: event.target.value });
     }
@@ -100,11 +101,7 @@ export class OpdaterBorger extends Component {
     }
 
     handleChangeCareNeed(event) {
-        this.setState({ handleChangeCareNeed: event.target.value });
-    }
-
-    handleChangeCurrentStatus(event) {
-        this.setState({ currentStatus: event.target.value });
+        this.setState({ careNeed: event.target.value });
     }
 
     handleChangePlannedDischarge(event) {
@@ -147,84 +144,152 @@ export class OpdaterBorger extends Component {
         this.setState({ prospectiveSituation: event.target.value });
     }
 
-    handleChangeCareNeed(event) {
-        this.setState({ careNeed: event.target.value })
-    }
-
-
     render() {
 
         return (
-            <div>
+            <div style={{
+                position: 'absolute', left: '50%',
+                transform: 'translate(-50%)'
+            }}>
                 <h1>Borger oplysninger</h1>
+                <h3>Ændr oplysninger for borger {this.state.cpr}</h3>
                 <div>
-                    <form >
-                        <label>Borger:{this.state.borger.cpr}</label><br />
-                        <label>Fornavn: {this.state.borger.firstName}</label><br />
-                        <input type="text" onChange={this.handleChangeFirstname} ></input><br />
-                        <label>Efternavn {this.state.borger.lastName}</label><br />
-                        <input type="text" onChange={this.handleChangeLastname} ></input><br />
-                        <label></label><br />
+                    <form>
+                        <table>
+                            <th>
+                                <label>Borger:{this.state.borger.cpr}</label><br />
+                            </th>
+                            <tr>
+                                <td>
+                                    <label>Fornavn: {this.state.borger.firstName}</label><br />
+                                    <input type="text" onChange={this.handleChangeFirstname} ></input><br />
+                                </td>
+                                <td>
+                                    <label>Efternavn {this.state.borger.lastName}</label><br />
+                                    <input type="text" onChange={this.handleChangeLastname} ></input><br />
+                                </td>
+                            </tr>
+                            <label></label><br />
+                            <tr>
+                                <td>
+                                    <label>Pårørende:</label><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Pårørendes fornavn</label><br />
+                                    <input type="text" onChange={this.handleChangeRelativeFirstName} ></input><br />
+                                </td>
+                                <td>
+                                    <label>Pårørendes efternavn</label><br />
+                                    <input type="text" onChange={this.handleChangeRelativeLastName}></input><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Pårørendes telefonnummer</label><br />
+                                    <input type="number" onChange={this.handleChangeRelativePhonenumber}></input><br />
+                                </td>
+                                <td>
+                                    <label>Relation</label><br />
+                                    <input type="text" onChange={this.handleChangeRelativeRelation} ></input><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Primær pårørende</label><br />
+                                    <input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === true} value="v1"></input><br />
+                                    <input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === false} value="v2"></input><br />
+                                </td>
+                                <td>
+                                    <br />
+                                    <label>Ja</label><br/>
+                                    <label>Nej</label><br/>
+                                </td>
+                            </tr>
+                            <label></label><br />
+                            <tr>
+                                <td>
+                                    <label>Opholdsinformation:</label><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Startdato</label><br />
+                                    <input type="date" onChange={this.handleChangeStartdato} ></input><br />
+                                </td>
+                                <td>
+                                    <label>Reevalueringsdato</label><br />
+                                    <input type="date" onChange={this.handleChangeReevalutationDate} ></input><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Planlagt udskrivning</label><br />
+                                    <input type="date" onChange={this.handleChangePlannedDischarge} ></input><br />
+                                </td>
+                                <td>
+                                    <label>Borgers fremtidige situation</label><br />
+                                    <select onChange={this.handleChangeProspectiveSituation}>
+                                        <option value="I bedring">I bedring</option>
+                                        <option value="Uændret">Uændret</option>
+                                        <option value="I forværring">I forværring</option>
+                                    </select><br />
+                                </td>
+                            </tr>
+                            <label></label><br />
+                            <tr>
+                                <td>
+                                    <label>Borgeroverblik og statushistorik:</label><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Mål for ophold</label><br />
+                                    <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
+                                </td>
+                                <td>
+                                    <label>Plejebehov</label><br />
+                                    <select onChange={this.handleChangeCareNeed}>
+                                        <option value="Lille">Lille</option>
+                                        <option value="Mellem">Mellem</option>
+                                        <option value="Stor">Stor</option>
+                                    </select><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
 
-                        <label>Pårørende:</label><br />
-                        <label>Pårørendes fornavn</label><br />
-                        <input type="text" onChange={this.handleChangeRelativeFirstName} ></input><br />
-                        <label>Pårørendes efternavn</label><br />
-                        <input type="text" onChange={this.handleChangeRelativeLastName}></input><br />
-                        <label>Pårørendes telefonnummer</label><br />
-                        <input type="number" onChange={this.handleChangeRelativePhonenumber}></input><br />
-                        <label>Relation</label><br />
-                        <input type="text" onChange={this.handleChangeRelativeRelation} ></input><br />
-                        <label>Primær pårørende</label><br />
-                        <label><input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === true} value="v1"></input>Ja</label><br />
-                        <label><input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === false} value="v2"></input>Nej</label><br />
-                        <label></label><br />
-
-                        <label>Opholdsinformation:</label><br />
-                        <label>Startdato</label><br />
-                        <input type="date" onChange={this.handleChangeStartdato} ></input><br />
-                        <label>Reevalueringsdato</label><br />
-                        <input type="date" onChange={this.handleChangeReevalutationDate} ></input><br />
-                        <label>Planlagt udskrivning</label><br />
-                        <input type="date" onChange={this.handleChangePlannedDischarge} ></input><br />
-                        <label>Borgers fremtidige situation</label><br />
-                        <select onChange={this.handleChangeProspectiveSituation}>
-                            <option value="I bedring">I bedring</option>
-                            <option value="Uændret">Uændret</option>
-                            <option value="I forværring">I forværring</option>
-                        </select><br />
-                        <label>Borgeroverblik og statushistorik:</label><br />
-                        <label>Plejebehov</label><br />
-                        <select onChange={this.handleChangeCareNeed}>
-                            <option value="Lille">Lille</option>
-                            <option value="Mellem">Mellem</option>
-                            <option value="Stor">Stor</option>
-                        </select><br />
-                        <label>Mål for ophold</label><br />
-                        <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
-                        <label>Nuværende status</label><br />
-                        <input type="text" onChange={this.handleChangeCurrentStatus} ></input><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Button color="primary" onClick={this.handleSubmit}>Gem</Button>
+                                </td>
+                                <td>
+                                    <Link to={{ pathname: "/" }} className="btn btn-primary">tilbage</Link>
+                                </td>
+                            </tr>
+                        </table>
                     </form>
                 </div>
             </div>
         );
     }
 
-
     async populateBorgerData() {
-
-        /*let jwt = localStorage.getItem("token")
-        console.log(jwt)
-        let jwtData = jwt.split('.')[1]
-        console.log(jwtData)
-        let decoded = window.atob(jwtData)
-        console.log(decoded)
-        let decodedData = JSON.parse(decoded)
-        this.id = decodedData['Role']*/
-
-        const response = await fetch('https://localhost:44356/rccsdb/citizen/' + this.state.cpr);
-        const data = await response.json();
+        const response = await fetch('https://localhost:44356/rccsdb/CitizenInformation/' + this.state.cpr, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
+                'Content-Type': 'application/json'
+            }
+        })
+        const data = response.json();
         this.setState({ borger: data, loading: false });
+        //console.log(this.state.borger);
+        
     }
 
 }

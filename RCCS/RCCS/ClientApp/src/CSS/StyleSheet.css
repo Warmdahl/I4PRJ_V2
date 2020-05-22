@@ -9,6 +9,9 @@ input {
     background-color: #f5f5f5;
 }
 
+
+
+
     input:invalid {
         border: red solid 1px;
     }
