@@ -1,6 +1,6 @@
 ﻿namespace RCCS.DatabaseUsers.Model.DTOs
 {
-    class Token
+    public class Token
     {
         public string JWT { get; set; }
     }
