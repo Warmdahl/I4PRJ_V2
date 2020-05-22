@@ -31,6 +31,8 @@ namespace RCCS.DatabaseAPI
         {
             services.AddDbContext<RCCSContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<RCCSUsersContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("UsersConnection")));
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>
