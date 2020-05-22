@@ -33,7 +33,7 @@ export class LogIn extends Component {
 
         let userStringified = JSON.stringify(user);
         const that = this;
-        fetch('/api/User/login', {
+        fetch('https://localhost:44356/api/User/login', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

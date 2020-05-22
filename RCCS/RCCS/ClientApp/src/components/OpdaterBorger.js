@@ -12,7 +12,7 @@ export class OpdaterBorger extends React.Component {
         super(props);
         let url = window.location.pathname.split("/");
         this.state = {
-            borger: [], cpr: url[2], FirstName: "", lastName: "Test", relativeFirstName: "",
+            borger: [], cpr: url[2], type: props.type, home: props.home, FirstName: "", lastName: "Test", relativeFirstName: "",
             relativeLastName: "", relativePhonenumber: 1, relativeRelation: "", relativeIsPrimary: true,
             startDate: null, reevaluationDate: null, plannedDischarge: null, prospectiveSituation: "test",
             careNeed: "", purposeOfStay: ""
@@ -36,7 +36,12 @@ export class OpdaterBorger extends React.Component {
     }
 
     componentDidMount() {
-        this.populateBorgerData();
+        //this.populateBorgerData();
+        let temp = 0
+        if (this.props.location.state.type === "Demensbolig") {
+            temp = 1
+        }
+        this.setState({ type: temp, home: this.props.location.state.name })
     }
 
     handleSubmit(event) {
@@ -44,10 +49,11 @@ export class OpdaterBorger extends React.Component {
         event.preventDefault();
         fetch(url, {
             method: 'PUT',
-            //credentials: 'include',
+            credentials: 'include',
             body: JSON.stringify({
                 "firstName": this.state.FirstName,
                 "lastName": this.state.lastName,
+                "cpr": Number(this.state.cpr),
                 "relativeFirstName": this.state.relativeFirstName,
                 "relativeLastName": this.state.relativeLastName,
                 "phonenumber": Number(this.state.relativePhonenumber),
@@ -59,9 +65,11 @@ export class OpdaterBorger extends React.Component {
                 "prospectiveSituationStatusForCitizen": this.state.prospectiveSituation,
                 "careNeed": this.state.careNeed,
                 "purposeOfStay": this.state.purposeOfStay,
+                "respiteCareHomeName": this.state.home,
+                "type": Number(this.state.type)
             }),
             headers: {
-                //'Authorization': 'Bearer' + localStorage.getItem("token"),
+                'Authorization': 'Bearer' + localStorage.getItem("token"),
                 'Content-Type': 'application/json'
             }
         }).then(responseJson => {
@@ -138,6 +146,7 @@ export class OpdaterBorger extends React.Component {
         this.setState({ careNeed: event.target.value })
     }
 
+    //{this.state.borger.cpr}
     render() {
 
         return (
@@ -146,6 +155,7 @@ export class OpdaterBorger extends React.Component {
                 transform: 'translate(-50%)'
             }}>
                 <h1>Borger oplysninger</h1>
+                <h3>Ændr oplysninger for borger </h3>
                 <div>
                     <form>
                         <table>
@@ -275,20 +285,31 @@ export class OpdaterBorger extends React.Component {
     }
 
 
-    async populateBorgerData() {
+    //async populateBorgerData() {
 
-        /*let jwt = localStorage.getItem("token")
-        console.log(jwt)
-        let jwtData = jwt.split('.')[1]
-        console.log(jwtData)
-        let decoded = window.atob(jwtData)
-        console.log(decoded)
-        let decodedData = JSON.parse(decoded)
-        this.id = decodedData['Role']*/
+    //////    /*let jwt = localStorage.getItem("token")
+    //////    console.log(jwt)
+    //////    let jwtData = jwt.split('.')[1]
+    //////    console.log(jwtData)
+    //////    let decoded = window.atob(jwtData)
+    //////    console.log(decoded)
+    //////    let decodedData = JSON.parse(decoded)
+    //////    this.id = decodedData['Role']*/
 
-        const response = await fetch('https://localhost:44356/rccsdb/citizen/' + this.state.cpr);
-        const data = await response.json();
-        this.setState({ borger: data, loading: false });
-    }
 
+
+    //    //const response = await fetch('https://localhost:44356/rccsdb/CitizenInformation/' + this.state.cpr);
+
+
+    //    const response = await fetch('https://localhost:44356/rccsdb/CitizenInformation/' + this.state.cpr, {
+    //        method: 'GET',
+    //        credentials: 'include',
+    //        headers: {
+    //            'Authorization': 'Bearer' + localStorage.getItem("token"),
+    //            'Content-Type': 'application/json'
+    //        }
+    //    })
+    //    const data = await response.json();
+    //    this.setState({ borger: data, loading: false });
+    //}
 }

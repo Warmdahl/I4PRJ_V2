@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RCCS.DatabaseCitizenResidency\RCCS.DatabaseCitizenResidency.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="ClientApp\src\Routes\" />
     <Folder Include="ClientApp\src\Security\" />
   </ItemGroup>
