@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RCCS.Database.Data;
-using RCCS.Database.Model;
+using RCCS.DatabaseCitizenResidency.Data;
+using RCCS.DatabaseCitizenResidency.Model;
 
 namespace RCCS.RCCSDbControllers
 {
@@ -51,11 +51,6 @@ namespace RCCS.RCCSDbControllers
             if (id != citizen.CPR)
             {
                 return BadRequest();
-            }
-
-            if (true)
-            {
-                var x = 1;
             }
 
             _context.Entry(citizen).State = EntityState.Modified;
