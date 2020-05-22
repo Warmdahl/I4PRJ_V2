@@ -6,12 +6,12 @@ export class BorgerVisning extends Component {
     static displayName = BorgerVisning.name;
 
     constructor(props) {
-        
+
         let url = window.location.pathname.split("/");
-        
+
         super(props);
-        this.state = { borger: [], loading: true, cpr: url[2], statusDate: new Date};
-    }   
+        this.state = { borger: [], loading: true, cpr: url[2], statusDate: new Date };
+    }
 
     componentDidMount() {
         this.populateBorgerData();
@@ -26,8 +26,8 @@ export class BorgerVisning extends Component {
     static borgertabel(borger, cpr, statusDate) {
         const relatives = borger.relatives;
         const statushist = borger.progressReports;
-        
-        
+        console.log(statushist);
+
         return (
             <table>
                 <th>
@@ -41,59 +41,59 @@ export class BorgerVisning extends Component {
                 <tr>
                     <td>
                         <table>
-                                <tr>
+                            <tr>
                                 Information
-  
+                                
                                 </tr>
-                                <tr>
-                                    <b>
-                                        Aflastingssted:
+                            <tr>
+                                <b>
+                                    Aflastingssted:
                                     </b>
 
-                                </tr>
-                                <tr>
-                                    {borger.respiteCareHome}
-                                </tr>
-                                <tr>
-                                    <b>Boligtype:</b>
-                                </tr>
-                                <tr>
-                                    {borger.careHomeType}
-                                </tr>
-                                <tr>
-                                    <b>Opstartsdato:</b>
-                                </tr>
-                                <tr>
-                                    {borger.dateOfAdmission}
-                                </tr>
-                                <tr>
-                                    <b>Revurderingsdato:</b>
-                                </tr>
-                                <tr>
-                                    {borger.evaluationDate}
-                                </tr>
-                                <tr>
-                                    <b>Planlagt udskrivelsesdato:</b>
-                                </tr>
-                                <tr>
-                                    {borger.timeUntilDischarge}
-                                </tr>
-                                <tr>
-                                    <b>Mål for ophold:</b>
-                                </tr>
-                                <tr>
-                                    {borger.purposeOfStay}
-                                </tr>
-                                <tr>
-                                    <b>Pårørende:</b>
+                            </tr>
+                            <tr>
+                                {borger.respiteCareHome}
+                            </tr>
+                            <tr>
+                                <b>Boligtype:</b>
+                            </tr>
+                            <tr>
+                                {borger.careHomeType}
+                            </tr>
+                            <tr>
+                                <b>Opstartsdato:</b>
+                            </tr>
+                            <tr>
+                                {borger.dateOfAdmission}
+                            </tr>
+                            <tr>
+                                <b>Revurderingsdato:</b>
+                            </tr>
+                            <tr>
+                                {borger.evaluationDate}
+                            </tr>
+                            <tr>
+                                <b>Planlagt udskrivelsesdato:</b>
+                            </tr>
+                            <tr>
+                                {borger.timeUntilDischarge}
+                            </tr>
+                            <tr>
+                                <b>Mål for ophold:</b>
+                            </tr>
+                            <tr>
+                                {borger.purposeOfStay}
+                            </tr>
+                            <tr>
+                                <b>Pårørende:</b>
                             </tr>
                             {relatives.map(relative =>
                                 <tr>
-                                    <td>{relative.firstName} {relative.lastName}, {relative.phoneNumber}, {relative.relation}  </td> 
-                                    <td>{relative.isPrimary}</td> 
+                                    <td>{relative.firstName} {relative.lastName}, {relative.phoneNumber}, {relative.relation}  </td>
+                                    <td>{relative.isPrimary}</td>
                                 </tr>
                             )}
-                       </table>
+                        </table>
                     </td>
                     <td>
                         <td>
@@ -117,21 +117,21 @@ export class BorgerVisning extends Component {
                                         {borger.careNeed}
                                     </td>
                                 </tr>
-                                <tr> 
+                                <tr>
                                     <td>
                                         <b>Revurderinger:</b>
                                     </td>
                                     <td>
                                         {borger.amountOfEvaluations}
                                     </td>
-                                </tr>                              
+                                </tr>
                             </table>
                         </td>
                         <td>
                             <table>
-                                  <tr>
+                                <tr>
                                     <b>Statushistorik</b>
-                                  </tr>
+                                </tr>
                                 <tr>
                                     {statushist.map(statushistory =>
                                         <tr>
@@ -143,25 +143,25 @@ export class BorgerVisning extends Component {
                                 <tr></tr>
                                 <tr></tr>
                             </table>
-                        </td>                        
+                        </td>
                         <table>
                             <tr>
                                 <td>Seneste status rapport</td>
                             </tr>
                             <tr>
                                 <td colSpan="4">
-                                    <textarea cols="55" rows="6"></textarea>
+                                    <textarea readOnly value={statushist[statushist.length - 1].report} cols="55" rows="6"></textarea>
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-            
+
             </table>
         );
     }
 
-    
+
 
     //static relativestable(borger) {
     //    const relatives = borger.relatives;
@@ -181,15 +181,15 @@ export class BorgerVisning extends Component {
     //        </table>
     //    );
     //}
-    
-    
-    
+
+
+
     render() {
-        
+
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
             : BorgerVisning.borgertabel(this.state.borger, this.state.cpr, this.state.statusDate);
-        
+
 
         return (
             <div>
@@ -209,5 +209,5 @@ export class BorgerVisning extends Component {
         this.setState({ statusDate: new Date(statushist[statushist.length - 1].date) });
 
     }
-    
+
 }

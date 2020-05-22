@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export class NyRapport extends Component {
     static displayName = NyRapport.name;
@@ -64,7 +64,6 @@ export class NyRapport extends Component {
                         <th></th>
                         <th>
                             <Link to={{ pathname: "/BorgerVisning/" + this.state.borger.cpr }} className="btn btn-primary" onClick={this.handleSubmit} color="white">Gem</Link>
-                            <button onClick={this.handleSubmit}>Gem rapport</button>
                         </th>
                     </tr>
                     <tr>
@@ -95,7 +94,7 @@ export class NyRapport extends Component {
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Title på evaluation</b>
+                                    <b>Title for evaluation</b>
                                 </td>
                                 <td>
                                     <input type="text" onChange={this.handleTitle} />
@@ -118,7 +117,7 @@ export class NyRapport extends Component {
 
 
     async populateBorgerData() {
-        const response = await fetch("https://localhost:44356/rccsdb/CreateProgressReport/"+this.state.cpr );
+        const response = await fetch("https://localhost:44356/rccsdb/CreateProgressReport/" + this.state.cpr);
         const data = await response.json();
         this.setState({ borger: data, loading: false });
     }
