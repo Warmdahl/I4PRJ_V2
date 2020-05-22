@@ -100,6 +100,7 @@ namespace RCCS.DatabaseAPI.RCCSDbControllers
             return BadRequest(ModelState);
         }
 
+        /*
         /// <summary>
         /// Use to change the password.
         /// </summary>
@@ -137,6 +138,7 @@ namespace RCCS.DatabaseAPI.RCCSDbControllers
                 return BadRequest(ModelState);
             }
         }
+        */
 
         private string GenerateToken(string personaleId, long userId, Role role)
         {
@@ -144,7 +146,7 @@ namespace RCCS.DatabaseAPI.RCCSDbControllers
             {
                 Role.Admin => new Claim(ClaimTypes.Role, "Admin"),
                 Role.Coordinator => new Claim(ClaimTypes.Role, "Coordinator"),
-                _ => new Claim(ClaimTypes.Role, "NursingStaff")
+                Role.NursingStaff => new Claim(ClaimTypes.Role, "NursingStaff")
             };
 
             var claims = new Claim[]
