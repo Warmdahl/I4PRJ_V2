@@ -19,60 +19,6 @@ namespace RCCS.DatabaseAPI.RCCSDbControllers
             _context = context;
         }
 
-        // GET: api/Citizen
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Citizen>>> GetCitizens()
-        {
-            return await _context.Citizens.ToListAsync();
-        }
-
-        // GET: api/Citizen/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Citizen>> GetCitizen(long id)
-        {
-            var citizen = await _context.Citizens.FindAsync(id);
-
-            if (citizen == null)
-            {
-                return NotFound();
-            }
-
-            return citizen;
-        }
-
-        // PUT: api/Citizen/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCitizen(long id, Citizen citizen)
-        {
-            if (id != citizen.CPR)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(citizen).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CitizenExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-
         // DELETE: rccsdb/Citizen/5
         [HttpDelete("{cpr}")]
         public async Task<ActionResult<Citizen>> DeleteCitizen(long cpr)
@@ -101,11 +47,6 @@ namespace RCCS.DatabaseAPI.RCCSDbControllers
             await _context.SaveChangesAsync();
 
             return citizen;
-        }
-
-        private bool CitizenExists(long id)
-        {
-            return _context.Citizens.Any(e => e.CPR == id);
         }
     }
 }
