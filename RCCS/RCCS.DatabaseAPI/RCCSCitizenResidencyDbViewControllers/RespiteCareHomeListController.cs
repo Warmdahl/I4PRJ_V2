@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RCCS.DatabaseCitizenResidency.Data;
 using RCCS.DatabaseCitizenResidency.ViewModel;
 
-namespace RCCS.DatabaseAPI.RCCSDbViewControllers
+namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]

@@ -145,53 +145,54 @@ export class OpdaterBorger extends Component {
         return (
             <div>
                 <h1>Borger oplysninger</h1>
+                <h3>Ændr oplysninger for borger {this.state.borger.cpr}</h3>
                 <div>
                     <form >
-                        <label>Borger:{this.state.borger.cpr}</label><br />
-                        <label>Fornavn: {this.state.borger.firstName}</label><br />
-                        <input type="text" onChange={this.handleChangeFirstname} ></input><br />
-                        <label>Efternavn {this.state.borger.lastName}</label><br />
-                        <input type="text" onChange={this.handleChangeLastname} ></input><br />
+                        <label>Borger:</label><br />
+                        <label>Fornavn nuværende: {this.state.borger.firstName}</label><br />
+                        <input type="text" onChange={this.handleChangeFirstname}  ></input><br />
+                        <label>Efternavn nuværende: {this.state.borger.lastName}</label><br />
+                        <input type="text" onChange={this.handleChangeLastname}  ></input><br />
                         <label></label><br />
 
                         <label>Pårørende:</label><br />
-                        <label>Pårørendes fornavn</label><br />
+                        <label>Pårørendes fornavn nuværende: {this.state.relativeFirstName}</label><br />
                         <input type="text" onChange={this.handleChangeRelativeFirstName} ></input><br />
-                        <label>Pårørendes efternavn</label><br />
-                        <input type="text" onChange={this.handleChangeRelativeLastName}></input><br />
-                        <label>Pårørendes telefonnummer</label><br />
-                        <input type="number" onChange={this.handleChangeRelativePhonenumber}></input><br />
-                        <label>Relation</label><br />
+                        <label>Pårørendes efternavn nuværende: {this.state.relativeLastName}</label><br />
+                        <input type="text" onChange={this.handleChangeRelativeLastName} ></input><br />
+                        <label>Pårørendes telefonnummer nuværende: {this.state.relativePhonenumber}</label><br />
+                        <input type="number" onChange={this.handleChangeRelativePhonenumber} ></input><br />
+                        <label>Relation nuværende: {this.state.relativeRelation}</label><br />
                         <input type="text" onChange={this.handleChangeRelativeRelation} ></input><br />
-                        <label>Primær pårørende</label><br />
+                        <label>Primær pårørende nuværende: {this.state.relativeIsPrimary}</label><br />
                         <label><input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === true} value="v1"></input>Ja</label><br />
                         <label><input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === false} value="v2"></input>Nej</label><br />
                         <label></label><br />
 
                         <label>Opholdsinformation:</label><br />
-                        <label>Startdato</label><br />
+                        <label>Startdato nuværende: {this.state.startDate}</label><br />
                         <input type="date" onChange={this.handleChangeStartdato} ></input><br />
-                        <label>Reevalueringsdato</label><br />
+                        <label>Reevalueringsdato nuværende: {this.state.reevaluationDate}</label><br />
                         <input type="date" onChange={this.handleChangeReevalutationDate} ></input><br />
-                        <label>Planlagt udskrivning</label><br />
+                        <label>Planlagt udskrivning nuværende: {this.state.plannedDischarge}</label><br />
                         <input type="date" onChange={this.handleChangePlannedDischarge} ></input><br />
-                        <label>Borgers fremtidige situation</label><br />
+                        <label>Borgers fremtidige situation nuværende: {this.state.prospectiveSituation}</label><br />
                         <select onChange={this.handleChangeProspectiveSituation}>
                             <option value="I bedring">I bedring</option>
                             <option value="Uændret">Uændret</option>
                             <option value="I forværring">I forværring</option>
                         </select><br />
                         <label>Borgeroverblik og statushistorik:</label><br />
-                        <label>Plejebehov</label><br />
+                        <label>Plejebehov nuværende: {this.state.careNeed}</label><br />
                         <select onChange={this.handleChangeCareNeed}>
                             <option value="Lille">Lille</option>
                             <option value="Mellem">Mellem</option>
                             <option value="Stor">Stor</option>
                         </select><br />
-                        <label>Mål for ophold</label><br />
+                        <label>Mål for ophold nuværende: {this.state.purposeOfStay}</label><br />
                         <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
-                        <label>Nuværende status</label><br />
-                        <input type="text" onChange={this.handleChangeCurrentStatus} ></input><br />
+
+
                     </form>
                 </div>
             </div>

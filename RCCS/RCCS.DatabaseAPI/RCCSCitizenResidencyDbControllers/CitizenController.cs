@@ -1,13 +1,10 @@
-﻿/*
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RCCS.DatabaseCitizenResidency.Data;
 using RCCS.DatabaseCitizenResidency.Model;
 
-namespace RCCS.DatabaseAPI.RCCSDbControllers
+namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]
@@ -51,4 +48,3 @@ namespace RCCS.DatabaseAPI.RCCSDbControllers
         }
     }
 }
-*/
