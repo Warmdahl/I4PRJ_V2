@@ -1,6 +1,6 @@
-﻿import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from "reactstrap";
+﻿import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {Button} from "reactstrap";
 import '../CSS/StyleSheet.css'
 
 export class FindBorger extends Component {
@@ -8,7 +8,7 @@ export class FindBorger extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { findborgers: [], loading: true, search: '' };
+        this.state = {findborgers: [], loading: true, search: ''};
     }
 
     componentDidMount() {
@@ -16,7 +16,7 @@ export class FindBorger extends Component {
     }
 
     updateSearch(event) {
-        this.setState({ search: event.target.value.substr(0,20) });
+        this.setState({search: event.target.value.substr(0, 20)});
     }
 
     static renderFindBorgerTable(findborgers) {
@@ -28,7 +28,7 @@ export class FindBorger extends Component {
                     <th>Name</th>
                     <th>Carehome</th>
                     <th>Time till discharge</th>
-                    <th>Status </th>
+                    <th>Status</th>
                     <th>Vis Borger</th>
                 </tr>
                 </thead>
@@ -41,8 +41,9 @@ export class FindBorger extends Component {
                         <td>{borger.timeUntilDischarge}</td>
                         <td>{borger.prospectiveSituationStatusForCitizen}</td>
                         <td>
-                            {<Link to={{ pathname: "./BorgerVisning/" + borger.cpr }} className="btn btn-primary" color="white">Vis {borger.citizenName}</Link>}
-                        </td>                        
+                            {<Link to={{pathname: "./BorgerVisning/" + borger.cpr}} className="btn btn-primary"
+                                   color="white">Vis {borger.citizenName}</Link>}
+                        </td>
                     </tr>
                 )}
                 </tbody>
@@ -63,33 +64,44 @@ export class FindBorger extends Component {
         //this.state.findborgers
 
         return (
-         
-                <div>
-                <head>link rel = "searchbar" href = "StyleSheet.css" </head>
-                
-                <h1 id="tabelLabel" >Borger liste</h1>
+
+            <div>
+                <head>link rel = "searchbar" href = "StyleSheet.css"</head>
+
+                <h1 id="tabelLabel">Borger liste</h1>
                 <p>Her kan der ses en liste over borgere i systemet.</p>
 
-                
-                    <input type="text"
-                    value={this.state.search}
-                    onChange={this.updateSearch.bind(this)}
-                        placeholder="Søg..." />
-                  
-             
-                
-              
-                    {contents}
-                
-                </div>
-            
+
+                <input type="text"
+                       value={this.state.search}
+                       onChange={this.updateSearch.bind(this)}
+                       placeholder="Søg..."/>
+
+
+                {contents}
+
+            </div>
+
         );
     }
-    
-    
+
+
     async populateBorgerData() {
-        const response = await fetch('https://localhost:44356/rccsdb/citizenlist');
+        const that = this;
+        const response = await fetch("https://localhost:44356/rccsdb/citizenlist", {
+            method: 'GET',  // Or POST, PUT, DELETE
+            credentials: 'include',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
+                'Content-Type': 'application/json'
+            }
+        }).catch(error => {
+            console.error('Caught error:', error);
+            t.setState({
+                Error: true
+            });
+        });
         const data = await response.json();
-        this.setState({ findborgers: data, loading: false });
+        this.setState({findborgers: data, loading: false});
     }
 }

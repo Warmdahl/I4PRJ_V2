@@ -1,5 +1,5 @@
-﻿import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+﻿import React, {Component} from 'react';
+import {Link} from "react-router-dom";
 import '../CSS/StyleSheet.css'
 
 export class BorgerVisning extends Component {
@@ -10,18 +10,20 @@ export class BorgerVisning extends Component {
         let url = window.location.pathname.split("/");
 
         super(props);
-        this.state = { borger: [], loading: true, cpr: url[2], statusDate: new Date, admissiondate: new Date, evaluationdate: new Date };
+        this.state = {
+            borger: [],
+            loading: true,
+            cpr: url[2],
+            statusDate: new Date,
+            admissiondate: new Date,
+            evaluationdate: new Date
+        };
     }
 
     componentDidMount() {
         this.populateBorgerData();
     }
 
-    //DateObjectification()
-    //{
-    //    const statushist = this.state.borger.statusHistories;
-    //    this.setState({ statusDate: new Date(statushist[0].date) });
-    //}
 
     static borgertabel(borger, cpr, statusDate, admissiondate, evaluationdate) {
         const relatives = borger.relatives;
@@ -30,8 +32,7 @@ export class BorgerVisning extends Component {
         var reports;
         if (statushist.length != 0) {
             reports = statushist[statushist.length - 1].report
-        }
-        else {
+        } else {
             reports = null;
         }
 
@@ -40,24 +41,26 @@ export class BorgerVisning extends Component {
         return (
             <table>
                 <th>
-                    <b>{borger.citizenName}</b>  {borger.age} år {borger.cpr}
+                    <b>{borger.citizenName}</b> {borger.age} år {borger.cpr}
                 </th>
-                <th>  </th>
+                <th></th>
                 <th>
-                    <Link to={{ pathname: "/OpdaterBorger/" + borger.cpr }} className="btn btn-primary" color="white">Opdater Borger</Link>
-                    <Link to={{ pathname: "/NyRapport/" + borger.cpr }} className="btn btn-primary" color="white">Ny statusrapport</Link>
+                    <Link to={{pathname: "/OpdaterBorger/" + borger.cpr}} className="btn btn-primary" color="white">Opdater
+                        Borger</Link>
+                    <Link to={{pathname: "/NyRapport/" + borger.cpr}} className="btn btn-primary" color="white">Ny
+                        statusrapport</Link>
                 </th>
                 <tr>
                     <td>
                         <table>
                             <tr>
                                 Information
-                                
-                                </tr>
+
+                            </tr>
                             <tr>
                                 <b>
                                     Aflastingssted:
-                                    </b>
+                                </b>
 
                             </tr>
                             <tr>
@@ -171,28 +174,6 @@ export class BorgerVisning extends Component {
     }
 
 
-
-    //static relativestable(borger) {
-    //    const relatives = borger.relatives;
-    //    return (
-    //        <table className="table table-striped">
-    //            <tbody>
-    //                {relatives.map(relative =>
-    //                    <tr>
-    //                        <td>{relative.isPrimary}</td>
-    //                        <td>{relative.firstName}</td>
-    //                        <td>{relative.lastName}</td>
-    //                        <td>{relative.phoneNumber}</td>
-    //                        <td>{relative.relation}</td>
-    //                    </tr>
-    //                )}
-    //            </tbody>
-    //        </table>
-    //    );
-    //}
-
-
-
     render() {
 
         let contents = this.state.loading
@@ -210,14 +191,29 @@ export class BorgerVisning extends Component {
 
 
     async populateBorgerData() {
-        const response = await fetch("https://localhost:44356/rccsdb/CitizenInformation/" + this.state.cpr);
+        const response = await fetch("https://localhost:44356/rccsdb/CitizenInformation/" + this.state.cpr, {
+            method: 'GET',  // Or POST, PUT, DELETE
+            credentials: 'include',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
+                'Content-Type': 'application/json'
+            }
+            });
         const data = await response.json();
-        this.setState({ borger: data, loading: false });
+        this.setState({borger: data, loading: false});
 
         const admis = this.state.borger.dateOfAdmission;
         const eva = this.state.borger.evaluationDate;
         const statushist = this.state.borger.progressReports;
-        this.setState({ statusDate: new Date(statushist[statushist.length - 1].date), admissiondate: new Date(admis), evaluationdate: new Date(eva) });
+        if (statushist.length != 0) {
+            this.setState({
+                statusDate: new Date(statushist[statushist.length - 1].date),
+                admissiondate: new Date(admis),
+                evaluationdate: new Date(eva)
+            });
+        } else {
+            this.setState({statusDate: null, admissiondate: new Date(admis), evaluationdate: new Date(eva)});
+        }
     }
 
 }
