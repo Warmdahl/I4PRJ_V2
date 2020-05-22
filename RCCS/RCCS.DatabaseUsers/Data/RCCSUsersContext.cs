@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
 using RCCS.DatabaseUsers.Model.Entities;
 
 namespace RCCS.DatabaseUsers.Data
 {
-    class RCCSUsersContext : DbContext
+    public class RCCSUsersContext : DbContext
     {
         public RCCSUsersContext(DbContextOptions<RCCSUsersContext> options)
             : base(options)
