@@ -5,10 +5,7 @@ namespace RCCS.DatabaseUsers.Data
 {
     public class RCCSUsersContext : DbContext
     {
-        public RCCSUsersContext(DbContextOptions<RCCSUsersContext> options)
-            : base(options)
-        {
-        }
+        public RCCSUsersContext(DbContextOptions<RCCSUsersContext> options) : base(options) { }
 
         public DbSet<EfUser> Users { get; set; }
         public DbSet<EfAdmin> Admins { get; set; }

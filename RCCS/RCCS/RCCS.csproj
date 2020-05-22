@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RCCS.Database\RCCS.Database.csproj" />
+    <ProjectReference Include="..\RCCS.DatabaseCitizenResidency\RCCS.DatabaseCitizenResidency.csproj" />
   </ItemGroup>
 
   <ItemGroup>

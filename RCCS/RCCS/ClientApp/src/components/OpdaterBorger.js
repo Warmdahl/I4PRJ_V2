@@ -23,7 +23,6 @@ export class OpdaterBorger extends Component {
         this.handleChangeStartdato = this.handleChangeStartdato.bind(this);
         this.handleChangeCareNeed = this.handleChangeCareNeed.bind(this);
         this.handleChangeCurrentStatus = this.handleChangeCurrentStatus.bind(this);
-        this.handleChangeNumberOfReevaluations = this.handleChangeNumberOfReevaluations.bind(this);
         this.handleChangePlannedDischarge = this.handleChangePlannedDischarge.bind(this);
         this.handleChangePurposeOfStay = this.handleChangePurposeOfStay.bind(this);
         this.handleChangeReevalutationDate = this.handleChangeReevalutationDate.bind(this);
@@ -33,7 +32,6 @@ export class OpdaterBorger extends Component {
         this.handleChangeRelativePhonenumber = this.handleChangeRelativePhonenumber.bind(this);
         this.handleChangeRelativeRelation = this.handleChangeRelativeRelation.bind(this);
         this.handleChangeProspectiveSituation = this.handleChangeProspectiveSituation.bind(this);
-
     }
 
     componentDidMount() {
@@ -109,10 +107,6 @@ export class OpdaterBorger extends Component {
         this.setState({ currentStatus: event.target.value });
     }
 
-    handleChangeNumberOfReevaluations(event) {
-        this.setState({ numberOfReevlaluations: event.target.value });
-    }
-
     handleChangePlannedDischarge(event) {
         this.setState({ plannedDischarge: event.target.value });
     }
@@ -158,10 +152,6 @@ export class OpdaterBorger extends Component {
     }
 
 
-
-
-
-
     render() {
 
         return (
@@ -174,9 +164,8 @@ export class OpdaterBorger extends Component {
                         <input type="text" onChange={this.handleChangeFirstname} ></input><br />
                         <label>Efternavn {this.state.borger.lastName}</label><br />
                         <input type="text" onChange={this.handleChangeLastname} ></input><br />
-                        <label>Cpr-nummer</label><br />
-                        <input type="number" onChange={this.handleChangeCpr} ></input><br />
                         <label></label><br />
+
                         <label>Pårørende:</label><br />
                         <label>Pårørendes fornavn</label><br />
                         <input type="text" onChange={this.handleChangeRelativeFirstName} ></input><br />
@@ -190,6 +179,7 @@ export class OpdaterBorger extends Component {
                         <label><input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === true} value="v1"></input>Ja</label><br />
                         <label><input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === false} value="v2"></input>Nej</label><br />
                         <label></label><br />
+
                         <label>Opholdsinformation:</label><br />
                         <label>Startdato</label><br />
                         <input type="date" onChange={this.handleChangeStartdato} ></input><br />
@@ -214,9 +204,6 @@ export class OpdaterBorger extends Component {
                         <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
                         <label>Nuværende status</label><br />
                         <input type="text" onChange={this.handleChangeCurrentStatus} ></input><br />
-                        <label>Antal reevalueringer</label><br />
-                        <input type="number" onChange={this.handleChangeNumberOfReevaluations} ></input><br />
-                        <button onClick={this.handleSubmit}>Gem</button>
                     </form>
                 </div>
             </div>

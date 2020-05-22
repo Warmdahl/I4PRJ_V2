@@ -346,9 +346,11 @@ healthchecksdb
 .DS_Store
 
 #Project specific ignores 
+bin/
 RCCS/.vs
 RCCS/RCCS/bin
-RCCS/RCCS.Database/bin
+RCCS/RCCS.DatabaseCitizenResidency/bin
+RCCS/RCCS.DatabaseCitizenResidency.Unit.Tests/bin
 RCCS/RCCS.DatabaseAPI/bin
-RCCS/RCCS.Database.Unit.Tests/bin
-RCCS/RCCS.Test.Unit/bin/
+RCCS/RCCS.DatabaseUsers/bin
+

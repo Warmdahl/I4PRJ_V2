@@ -7,9 +7,9 @@ namespace RCCS.DatabaseUsers
     {
         static void Main(string[] args)
         {
-            string[] jsonPath = { "/../../../../RCCS.DatabaseAPI/appsettings.json" };
-            DesignTimeRCCSUsersContextFactory rccsContextFactory = new DesignTimeRCCSUsersContextFactory();
-            using RCCSUsersContext context = rccsContextFactory.CreateDbContext(jsonPath);
+            //string[] jsonPath = { "/../../../../RCCS.DatabaseAPI/appsettings.json" };
+            //DesignTimeRCCSUsersContextFactory rccsContextFactory = new DesignTimeRCCSUsersContextFactory();
+            //using RCCSUsersContext context = rccsContextFactory.CreateDbContext(jsonPath);
         }
     }
 }

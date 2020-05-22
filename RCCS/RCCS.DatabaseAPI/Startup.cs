@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using RCCS.Database.Data;
+using RCCS.DatabaseCitizenResidency.Data;
 using RCCS.DatabaseUsers.Data;
 
 namespace RCCS.DatabaseAPI

@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>RCCS.DatabaseCitizenResidency</AssemblyName>
+    <RootNamespace>RCCS.DatabaseCitizenResidency</RootNamespace>
+    <LangVersion>8</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200430090738_AddedOnDeleteForRCRandCitizen.cs" />
+    <Compile Remove="Migrations\20200430090738_AddedOnDeleteForRCRandCitizen.Designer.cs" />
+    <Compile Remove="Migrations\20200430091741_AddedOnDeleteForRCR.cs" />
+    <Compile Remove="Migrations\20200430091741_AddedOnDeleteForRCR.Designer.cs" />
+    <Compile Remove="Migrations\20200430092445_AddedOnDeleteForRCRMadeCitizenCPRNullAble.cs" />
+    <Compile Remove="Migrations\20200430092445_AddedOnDeleteForRCRMadeCitizenCPRNullAble.Designer.cs" />
+    <Compile Remove="Migrations\20200430100459_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200430100459_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200430101958_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200430101958_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200430102225_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200430102225_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200430103636_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200430103636_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200430104828_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200430104828_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200430112916_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200430112916_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200430115059_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200430115059_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200509075630_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200509075630_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200514112558_initialcreate.cs" />
+    <Compile Remove="Migrations\20200514112558_initialcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200514114229_initialcreate.cs" />
+    <Compile Remove="Migrations\20200514114229_initialcreate.Designer.cs" />
+    <Compile Remove="Migrations\20200521075102_initialmigration.cs" />
+    <Compile Remove="Migrations\20200521075102_initialmigration.Designer.cs" />
+    <Compile Remove="Migrations\20200521075405_initialmigration.cs" />
+    <Compile Remove="Migrations\20200521075405_initialmigration.Designer.cs" />
+    <Compile Remove="Migrations\20200521081458_initialmigraiton.cs" />
+    <Compile Remove="Migrations\20200521081458_initialmigraiton.Designer.cs" />
+    <Compile Remove="Migrations\20200521081737_initialmigration.cs" />
+    <Compile Remove="Migrations\20200521081737_initialmigration.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
