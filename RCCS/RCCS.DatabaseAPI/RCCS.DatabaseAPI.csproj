@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RCCS.Database\RCCS.Database.csproj" />
-    <ProjectReference Include="..\RCCS.UsersDatabase\RCCS.UsersDatabase.csproj" />
+    <ProjectReference Include="..\RCCS.DatabaseCitizenResidency\RCCS.DatabaseCitizenResidency.csproj" />
+    <ProjectReference Include="..\RCCS.DatabaseUsers\RCCS.DatabaseUsers.csproj" />
   </ItemGroup>
 
 
