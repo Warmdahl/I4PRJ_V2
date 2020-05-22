@@ -44,7 +44,7 @@ export class BoligListe extends React.Component {
                         <td>{bolig.respiteCareRoomsTotal}</td>
                         <td>
 
-                            <Button variant={"primary"} disabled={bolig.availableRespiteCareRooms} onClick={this.props = { type: bolig.type, name: bolig.respiteCareHome  }} href={"./opretborger"}>Opret borger</Button>
+                            <Link to={{ pathname: "./opretborger", state: { type: bolig.type, name: bolig.respiteCareHome } }} className="btn btn-primary" color="white" >Opret Borger</Link>
                             
                         </td>  
                     </tr>

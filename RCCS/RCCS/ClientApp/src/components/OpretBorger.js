@@ -8,7 +8,7 @@ export class OpretBorger extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            type: props.type, home: props.name, FirstName: "", lastName: "Test", cpr: 1, relativeFirstName: "",
+            type: props.type, home: null, FirstName: "", lastName: "Test", cpr: 1, relativeFirstName: "",
             relativeLastName: "", relativePhonenumber: 1, relativeRelation: "", relativeIsPrimary: true,
             startDate: null, reevaluationDate: null, plannedDischarge: null, prospectiveSituation: "test",
             careNeed: "", purposeOfStay: "", currentStatus: "", numberOfReevlaluations: 0
@@ -35,10 +35,10 @@ export class OpretBorger extends React.Component {
 
     componentDidMount() {
         let temp = 0
-        if (this.state.type === "Demensbolig") {
+        if (this.props.location.state.type === "Demensbolig") {
             temp = 1
         }
-        this.setState({ type: temp })
+        this.setState({ type: temp, home: this.props.location.state.name })
         console.log(temp)
     }
 
@@ -67,8 +67,6 @@ export class OpretBorger extends React.Component {
                 "prospectiveSituationStatusForCitizen": this.state.prospectiveSituation,
                 "careNeed": this.state.careNeed,
                 "purposeOfStay": this.state.purposeOfStay,
-                "currentStatus": this.state.currentStatus,
-                "numberOfReevaluations": Number(this.state.numberOfReevlaluations),
                 "respiteCareHomeName": this.state.home,
                 "type": Number(this.state.type)
             }),
@@ -215,10 +213,6 @@ export class OpretBorger extends React.Component {
                             </select><br/>
                         <label>Mål for ophold</label><br />
                         <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
-                        <label>Nuværende status</label><br />
-                        <input type="text" onChange={this.handleChangeCurrentStatus} ></input><br />
-                        <label>Antal reevalueringer</label><br />
-                        <input type="number" onChange={this.handleChangeNumberOfReevaluations} ></input><br />
                         <button onClick={this.handleSubmit}>Gem</button>
                     </form>
                 </div>
