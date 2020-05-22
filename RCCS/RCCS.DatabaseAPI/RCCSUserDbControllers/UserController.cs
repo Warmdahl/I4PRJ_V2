@@ -25,11 +25,6 @@ namespace RCCS.DatabaseAPI.RCCSDbControllers
         private readonly RCCSUsersContext _context;
         private readonly AppSettings _appSettings;
 
-        public UserController(RCCSUsersContext context)
-        {
-            _context = context;
-        }
-
         public UserController(RCCSUsersContext context,
             IOptions<AppSettings> appSettings)
         {
