@@ -45,7 +45,7 @@ export class BorgerVisning extends Component {
                 </th>
                 <th></th>
                 <th>
-                    <Link to={{pathname: "/OpdaterBorger/" + borger.cpr}} className="btn btn-primary" color="white">Opdater
+                    <Link to={{ pathname: "/OpdaterBorger/" + borger.cpr, state: { type: borger.careHomeType, name: borger.respiteCareHome }}} className="btn btn-primary" color="white">Opdater
                         Borger</Link>
                     <Link to={{pathname: "/NyRapport/" + borger.cpr}} className="btn btn-primary" color="white">Ny
                         statusrapport</Link>

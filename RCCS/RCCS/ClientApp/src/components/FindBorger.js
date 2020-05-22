@@ -85,7 +85,6 @@ export class FindBorger extends Component {
         );
     }
 
-
     async populateBorgerData() {
         const that = this;
         const response = await fetch("https://localhost:44356/rccsdb/citizenlist", {

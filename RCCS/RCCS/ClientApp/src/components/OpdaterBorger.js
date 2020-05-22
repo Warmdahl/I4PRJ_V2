@@ -10,7 +10,7 @@ export class OpdaterBorger extends Component {
         super(props);
         let url = window.location.pathname.split("/");
         this.state = {
-            borger: [], cpr: url[2], FirstName: "", lastName: "Test", relativeFirstName: "",
+            borger: [], cpr: url[2], type: props.type, home: props.home, FirstName: "", lastName: "Test", relativeFirstName: "",
             relativeLastName: "", relativePhonenumber: 1, relativeRelation: "", relativeIsPrimary: true,
             startDate: null, reevaluationDate: null, plannedDischarge: null, prospectiveSituation: "test",
             careNeed: "", purposeOfStay: ""
@@ -34,7 +34,12 @@ export class OpdaterBorger extends Component {
     }
 
     componentDidMount() {
-        this.populateBorgerData();
+        //this.populateBorgerData();
+        let temp = 0
+        if (this.props.location.state.type === "Demensbolig") {
+            temp = 1
+        }
+        this.setState({ type: temp, home: this.props.location.state.name })
     }
 
     handleSubmit(event) {
@@ -42,10 +47,11 @@ export class OpdaterBorger extends Component {
         event.preventDefault();
         fetch(url, {
             method: 'PUT',
-            //credentials: 'include',
+            credentials: 'include',
             body: JSON.stringify({
                 "firstName": this.state.FirstName,
                 "lastName": this.state.lastName,
+                "cpr": Number(this.state.cpr),
                 "relativeFirstName": this.state.relativeFirstName,
                 "relativeLastName": this.state.relativeLastName,
                 "phonenumber": Number(this.state.relativePhonenumber),
@@ -57,9 +63,11 @@ export class OpdaterBorger extends Component {
                 "prospectiveSituationStatusForCitizen": this.state.prospectiveSituation,
                 "careNeed": this.state.careNeed,
                 "purposeOfStay": this.state.purposeOfStay,
+                "respiteCareHomeName": this.state.home,
+                "type": Number(this.state.type)
             }),
             headers: {
-                //'Authorization': 'Bearer' + localStorage.getItem("token"),
+                'Authorization': 'Bearer' + localStorage.getItem("token"),
                 'Content-Type': 'application/json'
             }
         }).then(responseJson => {
@@ -138,13 +146,13 @@ export class OpdaterBorger extends Component {
         this.setState({ careNeed: event.target.value })
     }
 
-
+    //{this.state.borger.cpr}
     render() {
 
         return (
             <div>
                 <h1>Borger oplysninger</h1>
-                <h3>Ændr oplysninger for borger {this.state.borger.cpr}</h3>
+                <h3>Ændr oplysninger for borger </h3>
                 <div>
                     <form >
                         <label>Borger:</label><br />
@@ -160,7 +168,7 @@ export class OpdaterBorger extends Component {
                         <label>Pårørendes efternavn nuværende: {this.state.relativeLastName}</label><br />
                         <input type="text" onChange={this.handleChangeRelativeLastName} ></input><br />
                         <label>Pårørendes telefonnummer nuværende: {this.state.relativePhonenumber}</label><br />
-                        <input type="number" onChange={this.handleChangeRelativePhonenumber} ></input><br />
+                        <input type="number" onChange={this.handleChangeRelativePhonenumber} min="10000000" ></input><br />
                         <label>Relation nuværende: {this.state.relativeRelation}</label><br />
                         <input type="text" onChange={this.handleChangeRelativeRelation} ></input><br />
                         <label>Primær pårørende nuværende: {this.state.relativeIsPrimary}</label><br />
@@ -190,7 +198,7 @@ export class OpdaterBorger extends Component {
                         </select><br />
                         <label>Mål for ophold nuværende: {this.state.purposeOfStay}</label><br />
                         <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
-
+                        <button onClick={this.handleSubmit}>Gem</button>
 
                     </form>
                 </div>
@@ -199,20 +207,31 @@ export class OpdaterBorger extends Component {
     }
 
 
-    async populateBorgerData() {
+    //async populateBorgerData() {
 
-        /*let jwt = localStorage.getItem("token")
-        console.log(jwt)
-        let jwtData = jwt.split('.')[1]
-        console.log(jwtData)
-        let decoded = window.atob(jwtData)
-        console.log(decoded)
-        let decodedData = JSON.parse(decoded)
-        this.id = decodedData['Role']*/
+    //////    /*let jwt = localStorage.getItem("token")
+    //////    console.log(jwt)
+    //////    let jwtData = jwt.split('.')[1]
+    //////    console.log(jwtData)
+    //////    let decoded = window.atob(jwtData)
+    //////    console.log(decoded)
+    //////    let decodedData = JSON.parse(decoded)
+    //////    this.id = decodedData['Role']*/
 
-        const response = await fetch('https://localhost:44356/rccsdb/citizen/' + this.state.cpr);
-        const data = await response.json();
-        this.setState({ borger: data, loading: false });
-    }
 
+
+    //    //const response = await fetch('https://localhost:44356/rccsdb/CitizenInformation/' + this.state.cpr);
+
+
+    //    const response = await fetch('https://localhost:44356/rccsdb/CitizenInformation/' + this.state.cpr, {
+    //        method: 'GET',
+    //        credentials: 'include',
+    //        headers: {
+    //            'Authorization': 'Bearer' + localStorage.getItem("token"),
+    //            'Content-Type': 'application/json'
+    //        }
+    //    })
+    //    const data = await response.json();
+    //    this.setState({ borger: data, loading: false });
+    //}
 }
