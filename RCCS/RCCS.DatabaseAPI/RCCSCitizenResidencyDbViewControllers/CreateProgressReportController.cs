@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RCCS.DatabaseCitizenResidency.Data;
@@ -11,6 +12,7 @@ namespace RCCS.DatabaseAPI.RCCSDbViewControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]
+    [Authorize("Admin, NursingStaff")]
     public class CreateProgressReportController : ControllerBase
     {
         private readonly RCCSContext _context;
@@ -53,7 +55,7 @@ namespace RCCS.DatabaseAPI.RCCSDbViewControllers
                 CitizenCPR = cprvm.CPR
             };
 
-            var citizen = 
+            var citizen =
                 await _context.Citizens
                     .Include(c => c.CitizenOverview)
                     .FirstOrDefaultAsync(c => c.CPR == cprvm.CPR);
@@ -82,13 +84,12 @@ namespace RCCS.DatabaseAPI.RCCSDbViewControllers
                 }
             }
 
-            return CreatedAtAction("PostProgressReport", new { id = progressReport.Date }, progressReport);
+            return CreatedAtAction("PostProgressReport", new {id = progressReport.Date}, progressReport);
         }
 
         private bool ProgressReportExists(long id)
         {
             return _context.ProgressReports.Any(e => e.Id == id);
         }
-
     }
 }

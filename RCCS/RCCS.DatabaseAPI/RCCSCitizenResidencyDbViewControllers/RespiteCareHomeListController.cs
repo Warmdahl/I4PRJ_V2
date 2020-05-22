@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RCCS.DatabaseCitizenResidency.Data;
@@ -11,6 +12,7 @@ namespace RCCS.DatabaseAPI.RCCSDbViewControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin, Coordinator")]
     public class RespiteCareHomeListController : ControllerBase
     {
         private readonly RCCSContext _context;
@@ -45,7 +47,7 @@ namespace RCCS.DatabaseAPI.RCCSDbViewControllers
 
                 var maxAlm = 0;
                 var maxDem = 0;
-                
+
                 foreach(var respiteCareRoom in respiteCareRoomList)
                 {
                     switch(respiteCareRoom.Type)
@@ -94,9 +96,9 @@ namespace RCCS.DatabaseAPI.RCCSDbViewControllers
                     RespiteCareRoomsTotal = maxAlm.ToString(),
                     AvailableRespiteCareRooms = almAvailable.ToString(),
 
-                    NextAvailableRespiteCareRoom = 
-                        almPlejeboligDischargeDateList.Any() ? 
-                            almPlejeboligDischargeDateList.Min().ToString("s") : 
+                    NextAvailableRespiteCareRoom =
+                        almPlejeboligDischargeDateList.Any() ?
+                            almPlejeboligDischargeDateList.Min().ToString("s") :
                             DateTime.Now.ToString("s")
                 };
 

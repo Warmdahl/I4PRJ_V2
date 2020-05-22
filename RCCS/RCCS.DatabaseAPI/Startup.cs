@@ -52,30 +52,30 @@ namespace RCCS.DatabaseAPI
             });
 
 
-        // configure strongly typed settings objects
-        var appSettingsSection = Configuration.GetSection("AppSettings");
-        services.Configure<AppSettings>(appSettingsSection);
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
 
-        // configure jwt authentication
-        var appSettings = appSettingsSection.Get<AppSettings>();
-        var key = Encoding.ASCII.GetBytes(appSettings.SecretKey);
-        services.AddAuthentication(x =>
-        {
-            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-        .AddJwtBearer(x =>
-        {
-            x.RequireHttpsMetadata = false;
-            x.SaveToken = true;
-            x.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false
-            };
-        });
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.SecretKey);
+            services.AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,13 +96,24 @@ namespace RCCS.DatabaseAPI
 
             app.UseRouting();
 
-            app.UseCors(builder =>
+            /* udkommenteret for at teste om en anden cors-konfiguration virkede bedre
+             app.UseCors(builder =>
                 builder.SetIsOriginAllowed(origin => _ = true)
                     //.WithOrigins("https://localhost:44356") //SSL URL
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     //.AllowCredentials() Not allowed together with AllowOrigin
                     .AllowAnyOrigin());
+                    */
+
+            app.UseCors(x => x
+                //.AllowAnyOrigin() // Not allowed together with AllowCredential
+                //.WithOrigins("http://localhost:8080", "http://localhost:5000" )
+                .SetIsOriginAllowed(x => _ = true)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+            );
 
             app.UseHttpsRedirection();
 
