@@ -1,17 +1,13 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Moq;
-using RCCS.Database.Data;
-using RCCS.Database.Model;
-using RCCS.RCCSDbControllers;
+using RCCS.DatabaseAPI.RCCSDbControllers;
+using RCCS.DatabaseCitizenResidency.Data;
+using RCCS.DatabaseCitizenResidency.Model;
 using Xunit;
 
-namespace RCCS.Database.Unit.Tests
+namespace RCCS.DatabaseCitizenResidency.Unit.Tests
 {
     /*
      * Code inspired from https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/testing?view=aspnetcore-3.1#unit-testing-controllers

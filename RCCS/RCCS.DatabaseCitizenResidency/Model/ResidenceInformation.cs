@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using System.Text.Json.Serialization;
-using RCCS.Database.Model;
 
-namespace RCCS.Database.Model
+namespace RCCS.DatabaseCitizenResidency.Model
 {
     public class ResidenceInformation
     {

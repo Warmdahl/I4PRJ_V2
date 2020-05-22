@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using RCCS.Database.Model;
+using RCCS.DatabaseCitizenResidency.Model;
 
-namespace RCCS.Database.ViewModel
+namespace RCCS.DatabaseCitizenResidency.ViewModel
 {
     public class CitizenInformationViewModel
     {

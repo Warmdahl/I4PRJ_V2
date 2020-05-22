@@ -1,7 +1,6 @@
-﻿using System;
-using RCCS.Database.Data;
+﻿using RCCS.DatabaseCitizenResidency.Data;
 
-namespace RCCS.Database
+namespace RCCS.DatabaseCitizenResidency
 {
     class Program
     {

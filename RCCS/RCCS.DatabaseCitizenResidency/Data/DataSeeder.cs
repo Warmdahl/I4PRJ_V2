@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-using RCCS.Database.Model;
+using RCCS.DatabaseCitizenResidency.Model;
 
-namespace RCCS.Database.Data
+namespace RCCS.DatabaseCitizenResidency.Data
 {
     public class DataSeeder
     {
