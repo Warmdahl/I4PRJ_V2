@@ -193,7 +193,13 @@ export class BorgerVisning extends Component {
         const admis = this.state.borger.dateOfAdmission;
         const eva = this.state.borger.evaluationDate;
         const statushist = this.state.borger.progressReports;
-        this.setState({ statusDate: new Date(statushist[statushist.length - 1].date), admissiondate: new Date(admis), evaluationdate: new Date(eva) });
+        if (statushist.length != 0) {
+            this.setState({ statusDate: new Date(statushist[statushist.length - 1].date), admissiondate: new Date(admis), evaluationdate: new Date(eva) });
+        }
+        else
+        {
+            this.setState({ statusDate: null, admissiondate: new Date(admis), evaluationdate: new Date(eva) });
+        }
     }
 
 }
