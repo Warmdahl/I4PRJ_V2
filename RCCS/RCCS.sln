@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.DatabaseAPI", "RCCS.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.DatabaseCitizenResidency.Unit.Tests", "RCCS.DatabaseCitizenResidency.Unit.Tests\RCCS.DatabaseCitizenResidency.Unit.Tests.csproj", "{72EF41D8-62AA-4E1E-85A9-5983712253E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.DatabaseUsers", "RCCS.DatabaseUsers\RCCS.DatabaseUsers.csproj", "{AE335BED-BF40-4765-BB39-8C2D583887ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.UsersDatabase", "RCCS.UsersDatabase\RCCS.UsersDatabase.csproj", "{AE335BED-BF40-4765-BB39-8C2D583887ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

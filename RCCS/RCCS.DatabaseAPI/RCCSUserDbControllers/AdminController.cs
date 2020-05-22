@@ -5,10 +5,10 @@
 //using Microsoft.AspNetCore.Mvc;
 //using Microsoft.EntityFrameworkCore;
 //using Microsoft.Extensions.Options;
-//using RCCS.DatabaseUsers.Data;
-//using RCCS.DatabaseUsers.Model.DTOs;
-//using RCCS.DatabaseUsers.Model.Entities;
-//using RCCS.DatabaseUsers.Utilities;
+//using RCCS.UsersDatabase.Data;
+//using RCCS.UsersDatabase.Model.DTOs;
+//using RCCS.UsersDatabase.Model.Entities;
+//using RCCS.UsersDatabase.Utilities;
 //using static BCrypt.Net.BCrypt;
 
 //namespace RCCS.DatabaseAPI.RCCSDbControllers.Security
