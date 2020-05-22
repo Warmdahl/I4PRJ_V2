@@ -346,6 +346,7 @@ healthchecksdb
 .DS_Store
 
 #Project specific ignores 
+bin/
 RCCS/.vs
 RCCS/RCCS/bin
 RCCS/RCCS.DatabaseCitizenResidency/bin
