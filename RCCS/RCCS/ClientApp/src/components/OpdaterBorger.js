@@ -3,7 +3,6 @@ import { Link, Route } from "react-router-dom";
 import { Label } from "reactstrap";
 
 
-
 export class OpdaterBorger extends Component {
     static displayName = OpdaterBorger.name;
 
