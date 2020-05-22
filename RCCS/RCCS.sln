@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.DatabaseAPI", "RCCS.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.Database.Unit.Tests", "RCCS.Database.Unit.Tests\RCCS.Database.Unit.Tests.csproj", "{72EF41D8-62AA-4E1E-85A9-5983712253E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCCS.UserDatabase", "RCCS.UserDatabase\RCCS.UserDatabase.csproj", "{B15929CC-8541-46CD-BBEE-AF1C8AC6307F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.DatabaseUsers", "RCCS.DatabaseUsers\RCCS.DatabaseUsers.csproj", "{AE335BED-BF40-4765-BB39-8C2D583887ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{72EF41D8-62AA-4E1E-85A9-5983712253E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72EF41D8-62AA-4E1E-85A9-5983712253E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72EF41D8-62AA-4E1E-85A9-5983712253E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B15929CC-8541-46CD-BBEE-AF1C8AC6307F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B15929CC-8541-46CD-BBEE-AF1C8AC6307F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B15929CC-8541-46CD-BBEE-AF1C8AC6307F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B15929CC-8541-46CD-BBEE-AF1C8AC6307F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE335BED-BF40-4765-BB39-8C2D583887ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE335BED-BF40-4765-BB39-8C2D583887ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE335BED-BF40-4765-BB39-8C2D583887ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE335BED-BF40-4765-BB39-8C2D583887ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
