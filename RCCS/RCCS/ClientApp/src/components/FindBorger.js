@@ -96,9 +96,13 @@ export class FindBorger extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(function (response) {
-            response.json().then(function (data) {
-                that.setState({findborgers: data, loading: false});
-            })
+            if (response.ok) {
+                response.json().then(function (data) {
+                    if (data != null) {
+                        that.setState({findborgers: data, loading: false});
+                    }
+                })
+            }
         }).catch(error => {
             console.error('Caught error:', error);
             that.setState({

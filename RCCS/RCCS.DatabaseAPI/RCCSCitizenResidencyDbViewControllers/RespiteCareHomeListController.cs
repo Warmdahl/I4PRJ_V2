@@ -12,7 +12,7 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin, Coordinator")]
+    [Authorize]
     public class RespiteCareHomeListController : ControllerBase
     {
         private readonly RCCSContext _context;

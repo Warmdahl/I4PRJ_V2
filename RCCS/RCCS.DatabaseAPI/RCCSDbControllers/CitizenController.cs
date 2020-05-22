@@ -13,7 +13,7 @@ namespace RCCS.RCCSDbControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Admin, Coordinator")]
     public class CitizenController : ControllerBase
     {
         private readonly RCCSContext _context;
@@ -25,7 +25,6 @@ namespace RCCS.RCCSDbControllers
 
         // GET: api/Citizen
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Citizen>>> GetCitizens()
         {
             return await _context.Citizens.ToListAsync();
@@ -33,7 +32,6 @@ namespace RCCS.RCCSDbControllers
 
         // GET: api/Citizen/5
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Citizen>> GetCitizen(long id)
         {
             var citizen = await _context.Citizens.FindAsync(id);
@@ -50,7 +48,6 @@ namespace RCCS.RCCSDbControllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutCitizen(long id, Citizen citizen)
         {
             if (id != citizen.CPR)
@@ -82,7 +79,6 @@ namespace RCCS.RCCSDbControllers
 
         // DELETE: rccsdb/Citizen/5
         [HttpDelete("{cpr}")]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Citizen>> DeleteCitizen(long cpr)
         {
             var citizen =

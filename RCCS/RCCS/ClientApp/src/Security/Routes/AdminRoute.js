@@ -1,13 +1,15 @@
 ﻿import React from 'react';
 import { Route } from 'react-router-dom';
-import { getRole } from "../Security/GetRole";
+import { getRole } from "../GetRole";
 import Redirect from "react-router-dom/Redirect";
 
-function AdminRoute({ component: Component, ...rest }) {
+export function AdminRoute({ component: Component, ...rest }) {
     let role = getRole();
-    console.log("adminroute gets role " + role);
+    console.log('AdminRoute.js says: Admin route enabled');
+    console.log("AdminRoute.js says: Role is: " + role)
     switch (role) {
         case "Admin": {
+            console.log('AdminRoute.js says: User is Admin. Access granted.');
             return (
                 <Route
                     {...rest}
@@ -17,19 +19,19 @@ function AdminRoute({ component: Component, ...rest }) {
                         )
                     }
                 />);
-            break;
         }
         default: {
+            console.log('AdminRoute.js says: User is not Authorized. Access NOT granted.');
+            console.log('Redirected to error page.');
             return (
                 <Route
                     {...rest}
                     render={props =>
                         (
-                            <Redirect to="log-in" />
+                            <Redirect to="NotAuthorized" />
                         )
                     }
                 />);
-            break;
         }
     }
 }
