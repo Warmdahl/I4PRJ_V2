@@ -191,7 +191,8 @@ export class OpdaterBorger extends Component {
                         </select><br />
                         <label>Mål for ophold nuværende: {this.state.purposeOfStay}</label><br />
                         <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
-                       
+
+
                     </form>
                 </div>
             </div>
