@@ -51,7 +51,7 @@ export class OpretBorger extends React.Component {
         event.preventDefault();
         fetch(url, {
             method: 'POST',
-            //credentials: 'include',
+            credentials: 'include',
             body: JSON.stringify({
                 "firstName": this.state.FirstName,
                 "lastName": this.state.lastName,
@@ -71,7 +71,7 @@ export class OpretBorger extends React.Component {
                 "type": Number(this.state.type)
             }),
             headers: {
-                //'Authorization': 'Bearer' + localStorage.getItem("token"),
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
                 'Content-Type': 'application/json'
             }
         }).then(responseJson => {
@@ -105,10 +105,6 @@ export class OpretBorger extends React.Component {
 
     handleChangeRelativeLastName(event) {
         this.setState({ relativeLastName: event.target.value });
-    }
-
-    handleChangeCareNeed(event) {
-        this.setState({ handleChangeCareNeed: event.target.value });
     }
 
     handleChangeCurrentStatus(event) {
