@@ -26,6 +26,15 @@ export class BorgerVisning extends Component {
     static borgertabel(borger, cpr, statusDate) {
         const relatives = borger.relatives;
         const statushist = borger.progressReports;
+
+        var reports;
+        if (statushist.length != 0) {
+            reports = statushist[statushist.length - 1].report
+        }
+        else {
+            reports = null;
+        }
+
         console.log(statushist);
 
         return (
@@ -150,7 +159,7 @@ export class BorgerVisning extends Component {
                             </tr>
                             <tr>
                                 <td colSpan="4">
-                                    <textarea readOnly value={statushist[statushist.length - 1].report} cols="55" rows="6"></textarea>
+                                    <textarea readOnly value={reports} cols="55" rows="6"></textarea>
                                 </td>
                             </tr>
                         </table>
@@ -207,7 +216,7 @@ export class BorgerVisning extends Component {
 
         const statushist = this.state.borger.progressReports;
         this.setState({ statusDate: new Date(statushist[statushist.length - 1].date) });
-
+        //Ændring
     }
 
 }
