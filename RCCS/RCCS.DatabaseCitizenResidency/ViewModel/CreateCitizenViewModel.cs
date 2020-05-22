@@ -22,7 +22,7 @@ namespace RCCS.DatabaseCitizenResidency.ViewModel
         public DateTime PlannedDischargeDate { get; set; }
         public string ProspectiveSituationStatusForCitizen { get; set; }
 
-        //Citizen Overview & Status History
+        //Citizen Overview 
         public string CareNeed { get; set; }
         public string PurposeOfStay { get; set; }
 

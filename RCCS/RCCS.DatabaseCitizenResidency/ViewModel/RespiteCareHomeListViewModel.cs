@@ -2,6 +2,7 @@
 {
     public class RespiteCareHomeListViewModel
     {
+        
         public string RespiteCareHome { get; set; }
         public string Address { get; set; }
         public string Type { get; set; }

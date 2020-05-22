@@ -30,7 +30,7 @@ namespace RCCS.DatabaseCitizenResidency.ViewModel
         public string CareNeed { get; set; }
         public string PurposeOfStay { get; set; }
 
-        //Status history (StatusHistory.cs)
+        //ProgressReport (ProgressReport.cs)
         public List<ProgressReport> ProgressReports { get; set; }
         //public DateTime DateOfStatus { get; set; }
         //public string StatusOverview { get; set; }
