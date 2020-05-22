@@ -10,7 +10,7 @@ export class BorgerVisning extends Component {
         let url = window.location.pathname.split("/");
 
         super(props);
-        this.state = { borger: [], loading: true, cpr: url[2], statusDate: new Date };
+        this.state = { borger: [], loading: true, cpr: url[2], statusDate: new Date, admissiondate: new Date, evaluationdate: new Date };
     }
 
     componentDidMount() {
@@ -23,9 +23,18 @@ export class BorgerVisning extends Component {
     //    this.setState({ statusDate: new Date(statushist[0].date) });
     //}
 
-    static borgertabel(borger, cpr, statusDate) {
+    static borgertabel(borger, cpr, statusDate, admissiondate, evaluationdate) {
         const relatives = borger.relatives;
         const statushist = borger.progressReports;
+
+        var reports;
+        if (statushist.length != 0) {
+            reports = statushist[statushist.length - 1].report
+        }
+        else {
+            reports = null;
+        }
+
         console.log(statushist);
 
         return (
@@ -64,13 +73,13 @@ export class BorgerVisning extends Component {
                                 <b>Opstartsdato:</b>
                             </tr>
                             <tr>
-                                {borger.dateOfAdmission}
+                                {admissiondate.toLocaleDateString()}
                             </tr>
                             <tr>
                                 <b>Revurderingsdato:</b>
                             </tr>
                             <tr>
-                                {borger.evaluationDate}
+                                {evaluationdate.toLocaleDateString()}
                             </tr>
                             <tr>
                                 <b>Planlagt udskrivelsesdato:</b>
@@ -150,7 +159,7 @@ export class BorgerVisning extends Component {
                             </tr>
                             <tr>
                                 <td colSpan="4">
-                                    <textarea readOnly value={statushist[statushist.length - 1].report} cols="55" rows="6"></textarea>
+                                    <textarea readOnly value={reports} cols="55" rows="6"></textarea>
                                 </td>
                             </tr>
                         </table>
@@ -188,7 +197,7 @@ export class BorgerVisning extends Component {
 
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : BorgerVisning.borgertabel(this.state.borger, this.state.cpr, this.state.statusDate);
+            : BorgerVisning.borgertabel(this.state.borger, this.state.cpr, this.state.statusDate, this.state.admissiondate, this.state.evaluationdate);
 
 
         return (
@@ -205,9 +214,10 @@ export class BorgerVisning extends Component {
         const data = await response.json();
         this.setState({ borger: data, loading: false });
 
+        const admis = this.state.borger.dateOfAdmission;
+        const eva = this.state.borger.evaluationDate;
         const statushist = this.state.borger.progressReports;
-        this.setState({ statusDate: new Date(statushist[statushist.length - 1].date) });
-
+        this.setState({ statusDate: new Date(statushist[statushist.length - 1].date), admissiondate: new Date(admis), evaluationdate: new Date(eva) });
     }
 
 }
