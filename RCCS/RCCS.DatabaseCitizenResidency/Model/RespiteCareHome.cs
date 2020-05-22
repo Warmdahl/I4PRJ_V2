@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace RCCS.Database.Model
+namespace RCCS.DatabaseCitizenResidency.Model
 {
     public class RespiteCareHome
     {

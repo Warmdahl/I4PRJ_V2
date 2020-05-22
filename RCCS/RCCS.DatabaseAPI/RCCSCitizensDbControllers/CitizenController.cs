@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RCCS.Database.Data;
-using RCCS.Database.Model;
+using RCCS.DatabaseCitizenResidency.Data;
+using RCCS.DatabaseCitizenResidency.Model;
 
-namespace RCCS.RCCSDbControllers
+namespace RCCS.DatabaseAPI.RCCSDbControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]

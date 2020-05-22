@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS", "RCCS\RCCS.csproj", "{A06A29D1-3C43-4948-AECB-65E227A923C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.Database", "RCCS.Database\RCCS.Database.csproj", "{0F0E1E72-FD3C-4779-9437-7EC1F5207C39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.DatabaseCitizenResidency", "RCCS.DatabaseCitizenResidency\RCCS.DatabaseCitizenResidency.csproj", "{0F0E1E72-FD3C-4779-9437-7EC1F5207C39}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.DatabaseAPI", "RCCS.DatabaseAPI\RCCS.DatabaseAPI.csproj", "{0933D64C-BB42-457A-9960-35BD336D5FAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.Database.Unit.Tests", "RCCS.Database.Unit.Tests\RCCS.Database.Unit.Tests.csproj", "{72EF41D8-62AA-4E1E-85A9-5983712253E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.DatabaseCitizenResidency.Unit.Tests", "RCCS.DatabaseCitizenResidency.Unit.Tests\RCCS.DatabaseCitizenResidency.Unit.Tests.csproj", "{72EF41D8-62AA-4E1E-85A9-5983712253E6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCS.UsersDatabase", "RCCS.UsersDatabase\RCCS.UsersDatabase.csproj", "{AE335BED-BF40-4765-BB39-8C2D583887ED}"
 EndProject

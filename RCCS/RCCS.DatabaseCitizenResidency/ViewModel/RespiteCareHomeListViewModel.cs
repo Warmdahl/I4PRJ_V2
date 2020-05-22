@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RCCS.Database.Model;
-
-namespace RCCS.Database.ViewModel
+﻿namespace RCCS.DatabaseCitizenResidency.ViewModel
 {
     public class RespiteCareHomeListViewModel
     {

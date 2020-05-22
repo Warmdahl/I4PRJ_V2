@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace RCCS.Database.Migrations
+namespace RCCS.DatabaseCitizenResidency.Migrations
 {
     public partial class initialcreate : Migration
     {

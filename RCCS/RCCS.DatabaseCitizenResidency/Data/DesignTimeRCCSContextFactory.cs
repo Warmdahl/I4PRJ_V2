@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
  * Code adapted from: https://gist.github.com/Rudyzio/dd1c565d58d955b09620d2201a7d5710#file-applicationdbcontext-cs
  */
 
-namespace RCCS.Database.Data
+namespace RCCS.DatabaseCitizenResidency.Data
 {
     class DesignTimeRCCSContextFactory : IDesignTimeDbContextFactory<RCCSContext>
     {

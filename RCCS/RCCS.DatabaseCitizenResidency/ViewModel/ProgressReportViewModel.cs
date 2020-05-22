@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RCCS.Database.ViewModel
+namespace RCCS.DatabaseCitizenResidency.ViewModel
 {
     public class ProgressReportViewModel
     {
