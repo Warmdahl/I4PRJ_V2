@@ -1,5 +1,5 @@
 ﻿using System;
-//using RCCS.DatabaseUsers.Data;
+using RCCS.DatabaseUsers.Data;
 
 namespace RCCS.DatabaseUsers
 {
@@ -7,10 +7,9 @@ namespace RCCS.DatabaseUsers
     {
         static void Main(string[] args)
         {
-            //string[] jsonPath = { "/../../../../RCCS.DatabaseAPI/appsettings.json" };
-            //DesignTimeRCCSUsersContextFactory rccsContextFactory = new DesignTimeRCCSUsersContextFactory();
-            //using RCCSContext context = rccsContextFactory.CreateDbContext(jsonPath);
-            Console.WriteLine("Hello World!");
+            string[] jsonPath = { "/../../../../RCCS.DatabaseAPI/appsettings.json" };
+            DesignTimeRCCSUsersContextFactory rccsContextFactory = new DesignTimeRCCSUsersContextFactory();
+            using RCCSUsersContext context = rccsContextFactory.CreateDbContext(jsonPath);
         }
     }
 }
