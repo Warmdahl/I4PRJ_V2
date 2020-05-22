@@ -95,13 +95,15 @@ export class FindBorger extends Component {
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
                 'Content-Type': 'application/json'
             }
+        }).then(function (response) {
+            response.json().then(function (data) {
+                that.setState({findborgers: data, loading: false});
+            })
         }).catch(error => {
             console.error('Caught error:', error);
-            t.setState({
+            that.setState({
                 Error: true
             });
         });
-        const data = await response.json();
-        this.setState({findborgers: data, loading: false});
     }
 }

@@ -11,7 +11,7 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class CitizenListController : ControllerBase
     {
         private readonly RCCSContext _context;

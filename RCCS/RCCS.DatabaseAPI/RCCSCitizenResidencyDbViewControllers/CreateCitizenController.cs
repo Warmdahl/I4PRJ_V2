@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RCCS.DatabaseCitizenResidency.Data;
@@ -11,6 +12,7 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin, Coordinator")]
     public class CreateCitizenController : ControllerBase
     {
         private readonly RCCSContext _context;
@@ -74,10 +76,10 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
                     break;
             }
 
-            var availableRespiteCareRoom = 
+            var availableRespiteCareRoom =
                 await _context.RespiteCareRooms
-                    .FirstOrDefaultAsync(rcr => (rcr.Type == rcrType) 
-                                                && (rcr.IsAvailable) 
+                    .FirstOrDefaultAsync(rcr => (rcr.Type == rcrType)
+                                                && (rcr.IsAvailable)
                                                 && (rcr.RespiteCareHomeName == ccvm.RespiteCareHomeName));
 
             availableRespiteCareRoom.CitizenCPR = ccvm.CPR;
@@ -104,7 +106,7 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
                     throw;
                 }
             }
-            
+
             return CreatedAtAction("PostCitizen", new { id = ccvm.CPR }, ccvm);
         }
         private bool CitizenExists(long id)
@@ -112,7 +114,7 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
             return _context.Citizens.Any(e => e.CPR == id);
         }
 
-        
+
         [HttpPut]
         public async Task<ActionResult<Citizen>> PutCitizen(CreateCitizenViewModel ccvm)
         {
@@ -166,5 +168,5 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
 
     }
 
-   
+
 }
