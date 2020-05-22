@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Link, Route } from "react-router-dom";
-import { Label } from "reactstrap";
+import { Link } from "react-router-dom";
+import '../CSS/StyleSheet.css';
+import { Button } from 'reactstrap';
 
 
-export class OpdaterBorger extends Component {
+
+export class OpdaterBorger extends React.Component {
     static displayName = OpdaterBorger.name;
 
     constructor(props) {
@@ -145,56 +147,134 @@ export class OpdaterBorger extends Component {
     render() {
 
         return (
-            <div>
+            <div style={{
+                position: 'absolute', left: '50%',
+                transform: 'translate(-50%)'
+            }}>
                 <h1>Borger oplysninger</h1>
                 <h3>Ændr oplysninger for borger {this.state.cpr}</h3>
                 <div>
-                    <form >
-                        <label>Borger:</label><br />
-                        <label>Fornavn </label><br />
-                        <input type="text" onChange={this.handleChangeFirstname}  ></input><br />
-                        <label>Efternavn </label><br />
-                        <input type="text" onChange={this.handleChangeLastname}  ></input><br />
-                        <label></label><br />
+                    <form>
+                        <table>
+                            <th>
+                                <label>Borger:{this.state.borger.cpr}</label><br />
+                            </th>
+                            <tr>
+                                <td>
+                                    <label>Fornavn: {this.state.borger.firstName}</label><br />
+                                    <input type="text" onChange={this.handleChangeFirstname} ></input><br />
+                                </td>
+                                <td>
+                                    <label>Efternavn {this.state.borger.lastName}</label><br />
+                                    <input type="text" onChange={this.handleChangeLastname} ></input><br />
+                                </td>
+                            </tr>
+                            <label></label><br />
+                            <tr>
+                                <td>
+                                    <label>Pårørende:</label><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Pårørendes fornavn</label><br />
+                                    <input type="text" onChange={this.handleChangeRelativeFirstName} ></input><br />
+                                </td>
+                                <td>
+                                    <label>Pårørendes efternavn</label><br />
+                                    <input type="text" onChange={this.handleChangeRelativeLastName}></input><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Pårørendes telefonnummer</label><br />
+                                    <input type="number" onChange={this.handleChangeRelativePhonenumber}></input><br />
+                                </td>
+                                <td>
+                                    <label>Relation</label><br />
+                                    <input type="text" onChange={this.handleChangeRelativeRelation} ></input><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Primær pårørende</label><br />
+                                    <input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === true} value="v1"></input><br />
+                                    <input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === false} value="v2"></input><br />
+                                </td>
+                                <td>
+                                    <br />
+                                    <label>Ja</label><br/>
+                                    <label>Nej</label><br/>
+                                </td>
+                            </tr>
+                            <label></label><br />
+                            <tr>
+                                <td>
+                                    <label>Opholdsinformation:</label><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Startdato</label><br />
+                                    <input type="date" onChange={this.handleChangeStartdato} ></input><br />
+                                </td>
+                                <td>
+                                    <label>Reevalueringsdato</label><br />
+                                    <input type="date" onChange={this.handleChangeReevalutationDate} ></input><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Planlagt udskrivning</label><br />
+                                    <input type="date" onChange={this.handleChangePlannedDischarge} ></input><br />
+                                </td>
+                                <td>
+                                    <label>Borgers fremtidige situation</label><br />
+                                    <select onChange={this.handleChangeProspectiveSituation}>
+                                        <option value="I bedring">I bedring</option>
+                                        <option value="Uændret">Uændret</option>
+                                        <option value="I forværring">I forværring</option>
+                                    </select><br />
+                                </td>
+                            </tr>
+                            <label></label><br />
+                            <tr>
+                                <td>
+                                    <label>Borgeroverblik og statushistorik:</label><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Mål for ophold</label><br />
+                                    <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
+                                </td>
+                                <td>
+                                    <label>Plejebehov</label><br />
+                                    <select onChange={this.handleChangeCareNeed}>
+                                        <option value="Lille">Lille</option>
+                                        <option value="Mellem">Mellem</option>
+                                        <option value="Stor">Stor</option>
+                                    </select><br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Nuværende status</label><br />
+                                    <input type="text" onChange={this.handleChangeCurrentStatus} ></input><br />
+                                </td>
+                                <td>
 
-                        <label>Pårørende:</label><br />
-                        <label>Pårørendes fornavn </label><br />
-                        <input type="text" onChange={this.handleChangeRelativeFirstName} ></input><br />
-                        <label>Pårørendes efternavn </label><br />
-                        <input type="text" onChange={this.handleChangeRelativeLastName} ></input><br />
-                        <label>Pårørendes telefonnummer </label><br />
-                        <input type="number" onChange={this.handleChangeRelativePhonenumber} min="10000000" ></input><br />
-                        <label>Relation </label><br />
-                        <input type="text" onChange={this.handleChangeRelativeRelation} ></input><br />
-                        <label>Primær pårørende </label><br />
-                        <label><input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === true} value="v1"></input>Ja</label><br />
-                        <label><input type="radio" onChange={this.handleChangeRelativeIsPrimary} checked={this.state.relativeIsPrimary === false} value="v2"></input>Nej</label><br />
-                        <label></label><br />
-
-                        <label>Opholdsinformation:</label><br />
-                        <label>Startdato </label><br />
-                        <input type="date" onChange={this.handleChangeStartdato} ></input><br />
-                        <label>Reevalueringsdato </label><br />
-                        <input type="date" onChange={this.handleChangeReevalutationDate} ></input><br />
-                        <label>Planlagt udskrivning </label><br />
-                        <input type="date" onChange={this.handleChangePlannedDischarge} ></input><br />
-                        <label>Borgers fremtidige situation</label><br />
-                        <select onChange={this.handleChangeProspectiveSituation}>
-                            <option value="I bedring">I bedring</option>
-                            <option value="Uændret">Uændret</option>
-                            <option value="I forværring">I forværring</option>
-                        </select><br />
-                        <label>Borgeroverblik:</label><br />
-                        <label>Plejebehov</label><br />
-                        <select onChange={this.handleChangeCareNeed}>
-                            <option value="Lille">Lille</option>
-                            <option value="Mellem">Mellem</option>
-                            <option value="Stor">Stor</option>
-                        </select><br />
-                        <label>Mål for ophold </label><br />
-                        <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
-                        <button onClick={this.handleSubmit}>Gem</button>
-
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <Button color="primary" onClick={this.handleSubmit}>Gem</Button>
+                                </td>
+                                <td>
+                                    <Link to={{ pathname: "/" }} className="btn btn-primary">tilbage</Link>
+                                </td>
+                            </tr>
+                        </table>
                     </form>
                 </div>
             </div>
