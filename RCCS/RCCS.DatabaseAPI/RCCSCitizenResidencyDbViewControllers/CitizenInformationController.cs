@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RCCS.DatabaseCitizenResidency.Data;
 using RCCS.DatabaseCitizenResidency.ViewModel;
 
-namespace RCCS.DatabaseAPI.RCCSDbViewControllers
+namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]
+    [Authorize]
     public class CitizenInformationController : ControllerBase
     {
         private readonly RCCSContext _context;
@@ -33,7 +35,7 @@ namespace RCCS.DatabaseAPI.RCCSDbViewControllers
                     .Include(c => c.ProgressReports)
                     .Include(c => c.CitizenOverview)
                     .SingleAsync(c => c.CPR.ToString() == id);
-            
+
             //Calculate Time until discharge for citizen
             var currentDate = DateTime.Now;
             var dischargeDate = citizen.ResidenceInformation.PlannedDischargeDate;
@@ -54,7 +56,7 @@ namespace RCCS.DatabaseAPI.RCCSDbViewControllers
                 timeUntilDiscarge = (daysUntilDiscarge / 7) + " uger";
             }
 
-            //Calculate age for citizen 
+            //Calculate age for citizen
             long birthday = citizen.CPR;
 
             static int[] Long2ManyInt(long birthday)
