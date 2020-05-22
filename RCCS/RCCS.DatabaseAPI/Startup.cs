@@ -34,13 +34,15 @@ namespace RCCS.DatabaseAPI
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddCors();
             services.AddDbContext<RCCSContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<RCCSUsersContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("UsersConnection")));
+
             services.AddControllers();
             services.AddCors();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -94,6 +96,8 @@ namespace RCCS.DatabaseAPI
                 c.RoutePrefix = string.Empty;
             });
 
+            app.UseHttpsRedirection();
+
             app.UseRouting();
 
             app.UseCors(builder =>
@@ -104,7 +108,7 @@ namespace RCCS.DatabaseAPI
                     //.AllowCredentials() Not allowed together with AllowOrigin
                     .AllowAnyOrigin());
 
-            app.UseHttpsRedirection();
+            
 
             app.UseAuthentication();
             app.UseAuthorization();

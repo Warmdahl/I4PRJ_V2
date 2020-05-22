@@ -71,9 +71,13 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests
                 var respiteCareRoom = new RespiteCareRoom
                 {
                     IsAvailable = true,
-                    RespiteCareHomeName = "Kærgården"
+                    RespiteCareHomeName = "Kærgården",
+                    RespiteCareHome = respiteCareHome,
+                    Citizen = citizen
                 };
 
+
+                context.RespiteCareRooms.AddRange(respiteCareRoom);
                 context.Relatives.Add(relative);
                 context.ResidenceInformations.Add(ri);
                 context.CitizenOverviews.Add(co);
