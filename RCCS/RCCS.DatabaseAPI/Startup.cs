@@ -81,7 +81,7 @@ namespace RCCS.DatabaseAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RCCSUsersContext usersContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RCCSUsersContext usersContext, RCCSContext context)
         {
             if (env.IsDevelopment())
             {
@@ -127,6 +127,8 @@ namespace RCCS.DatabaseAPI
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
             DataSeederUsers.SeedUsers(usersContext);
+
+            DataSeeder.SeedCitizenResidencyDb(context);
         }
     }
 }

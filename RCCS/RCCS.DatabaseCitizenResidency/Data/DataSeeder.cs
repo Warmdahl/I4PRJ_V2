@@ -1,21 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using RCCS.DatabaseCitizenResidency.Model;
 
 namespace RCCS.DatabaseCitizenResidency.Data
 {
-    public class DataSeeder
+    public static class DataSeeder
     {
-        private readonly RCCSContext _context;
-
-        public DataSeeder(RCCSContext context)
+        public static void SeedCitizenResidencyDb(RCCSContext context)
         {
-            _context = context;
+            context.Database.EnsureCreated();
+            if (!context.Citizens.Any() &&
+                !context.CitizenOverviews.Any() &&
+                !context.ProgressReports.Any() &&
+                !context.Relatives.Any() &&
+                !context.ResidenceInformations.Any() &&
+                !context.RespiteCareHomes.Any() &&
+                !context.RespiteCareRooms.Any())
+            {
+                SeedData1(context);
+                SeedData2(context);
+                SeedRespiteCareHomeData(context);
+            }
         }
 
-        public void SeedData1()
+        static void SeedData1(RCCSContext context)
         {
             var citizen = new Citizen
             {
@@ -76,7 +87,7 @@ namespace RCCS.DatabaseCitizenResidency.Data
 
             foreach (var careRoom in respiteCareRooms)
             {
-                _context.RespiteCareRooms.Add(careRoom);
+                context.RespiteCareRooms.Add(careRoom);
             }
 
             var residentInfo = new ResidenceInformation
@@ -99,18 +110,18 @@ namespace RCCS.DatabaseCitizenResidency.Data
 
 
             //Adds citizen
-            _context.ProgressReports.Add(progressReport);
-            _context.Relatives.Add(relative);
-            _context.CitizenOverviews.Add(citizenOverview);
-            _context.ResidenceInformations.Add(residentInfo);
+            context.ProgressReports.Add(progressReport);
+            context.Relatives.Add(relative);
+            context.CitizenOverviews.Add(citizenOverview);
+            context.ResidenceInformations.Add(residentInfo);
 
             //Adds room and home
-            _context.RespiteCareRooms.Add(respiteCareRoom);
+            context.RespiteCareRooms.Add(respiteCareRoom);
 
-            _context.SaveChanges();
+            context.SaveChanges();
         }
 
-        public void SeedData2()
+        static void SeedData2(RCCSContext context)
         {
             var citizen1 = new Citizen
             {
@@ -171,7 +182,7 @@ namespace RCCS.DatabaseCitizenResidency.Data
 
             foreach (var careRoom in respiteCareRooms)
             {
-                _context.RespiteCareRooms.Add(careRoom);
+                context.RespiteCareRooms.Add(careRoom);
             }
 
             var residentInfo1 = new ResidenceInformation
@@ -183,8 +194,6 @@ namespace RCCS.DatabaseCitizenResidency.Data
                 Citizen = citizen1
             };
 
-
-
             var progressReport1 = new ProgressReport
             {
                 Title = "I bedring",
@@ -195,18 +204,18 @@ namespace RCCS.DatabaseCitizenResidency.Data
             };
 
             //Adds citizen
-            _context.ProgressReports.Add(progressReport1);
-            _context.Relatives.Add(relative1);
-            _context.CitizenOverviews.Add(citizenOverview1);
-            _context.ResidenceInformations.Add(residentInfo1);
+            context.ProgressReports.Add(progressReport1);
+            context.Relatives.Add(relative1);
+            context.CitizenOverviews.Add(citizenOverview1);
+            context.ResidenceInformations.Add(residentInfo1);
 
             //Adds room and home
-            _context.RespiteCareRooms.Add(respiteCareRoom1);
+            context.RespiteCareRooms.Add(respiteCareRoom1);
 
-            _context.SaveChanges();
+            context.SaveChanges();
         }
 
-        public void SeedRespiteCareHomeData()
+        static void SeedRespiteCareHomeData(RCCSContext context)
         {
             var respiteCareHome1 = new RespiteCareHome
             {
@@ -245,14 +254,14 @@ namespace RCCS.DatabaseCitizenResidency.Data
                 }
             }
 
-            _context.RespiteCareHomes.Add(respiteCareHome1);
+            context.RespiteCareHomes.Add(respiteCareHome1);
 
             foreach (var respiteCareRoom in repiteCareRooms)
             {
-                _context.RespiteCareRooms.Add(respiteCareRoom);
+                context.RespiteCareRooms.Add(respiteCareRoom);
             }
 
-            _context.SaveChanges();
+            context.SaveChanges();
         }
     }
 }
