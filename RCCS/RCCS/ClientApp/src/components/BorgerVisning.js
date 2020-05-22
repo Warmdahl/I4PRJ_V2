@@ -10,7 +10,7 @@ export class BorgerVisning extends Component {
         let url = window.location.pathname.split("/");
 
         super(props);
-        this.state = { borger: [], loading: true, cpr: url[2], statusDate: new Date };
+        this.state = { borger: null, loading: true, cpr: url[2], statusDate: new Date };
     }
 
     componentDidMount() {
@@ -25,7 +25,8 @@ export class BorgerVisning extends Component {
 
     static borgertabel(borger, cpr, statusDate) {
         const relatives = borger.relatives;
-        const statushist = borger.progressReports;
+        var statushist = borger.progressReports;
+        
         console.log(statushist);
 
         return (
@@ -135,7 +136,7 @@ export class BorgerVisning extends Component {
                                 <tr>
                                     {statushist.map(statushistory =>
                                         <tr>
-                                            <td>{statusDate.toLocaleDateString()} {statushistory.title}</td>
+                                            <td>{statusDate.toLocaleString()} {statushistory.title}</td>
                                         </tr>
                                     )}
                                 </tr>
@@ -204,9 +205,9 @@ export class BorgerVisning extends Component {
         const response = await fetch("https://localhost:44356/rccsdb/CitizenInformation/" + this.state.cpr);
         const data = await response.json();
         this.setState({ borger: data, loading: false });
-
         const statushist = this.state.borger.progressReports;
         this.setState({ statusDate: new Date(statushist[statushist.length - 1].date) });
+        
 
     }
 
