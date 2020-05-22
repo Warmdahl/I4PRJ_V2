@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using RCCS.Database.Data;
+using RCCS.DatabaseUsers.Data;
 
 namespace RCCS.DatabaseAPI
 {
@@ -44,7 +45,7 @@ namespace RCCS.DatabaseAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RCCSUsersContext usersContext)
         {
             if (env.IsDevelopment())
             {
@@ -72,6 +73,8 @@ namespace RCCS.DatabaseAPI
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            DataSeederUsers.SeedUsers(usersContext);
 
             app.UseEndpoints(endpoints =>
             {
