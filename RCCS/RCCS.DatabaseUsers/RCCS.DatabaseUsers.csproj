@@ -1,71 +1,29 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{57A50378-9A88-44A5-B763-D25C449BB321}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>RCCS.UsersDatabase</RootNamespace>
-    <AssemblyName>RCCS.UsersDatabase</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <LangVersion>8</LangVersion>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers">
-      <Version>3.1.4</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer">
-      <Version>3.1.4</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
-      <Version>3.1.4</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.4" />
-    <PackageReference Include="NUnit" Version="2.6.4" />
-    <PackageReference Include="Swashbuckle.AspNetCore">
-      <Version>5.4.1</Version>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Xamarin.UITest" Version="2.2.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Data\DataSeederUsers.cs" />
-    <Compile Include="Data\DesignTimeRCCSUsersContextFactory.cs" />
-    <Compile Include="Data\RCCSUsersContext.cs" />
-    <Compile Include="Migrations\20200522102114_MyFirstMigration.cs" />
-    <Compile Include="Migrations\20200522102114_MyFirstMigration.Designer.cs" />
-    <Compile Include="Migrations\RCCSUsersContextModelSnapshot.cs" />
-    <Compile Include="Model\DTOs\Admin.cs" />
-    <Compile Include="Model\DTOs\Login.cs" />
-    <Compile Include="Model\DTOs\Token.cs" />
-    <Compile Include="Model\Entities\EfAdmin.cs" />
-    <Compile Include="Model\Entities\EfCoordinator.cs" />
-    <Compile Include="Model\Entities\EfNursingStaff.cs" />
-    <Compile Include="Model\Entities\EfUser.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Utilities\AppSettings.cs" />
+    <Folder Include="Entities\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+
 </Project>
