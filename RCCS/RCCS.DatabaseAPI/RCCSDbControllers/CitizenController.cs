@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RCCS.Database.Data;
-using RCCS.Database.Model;
+using RCCS.DatabaseCitizenResidency.Data;
+using RCCS.DatabaseCitizenResidency.Model;
 
 namespace RCCS.RCCSDbControllers
 {
