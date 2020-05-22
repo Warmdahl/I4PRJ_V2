@@ -53,6 +53,11 @@ namespace RCCS.RCCSDbControllers
                 return BadRequest();
             }
 
+            if (true)
+            {
+                var x = 1;
+            }
+
             _context.Entry(citizen).State = EntityState.Modified;
 
             try
