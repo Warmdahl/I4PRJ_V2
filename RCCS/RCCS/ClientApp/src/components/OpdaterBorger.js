@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link, Route} from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import { Label } from "reactstrap";
 //import axios from 'axios';
 
@@ -11,10 +11,11 @@ export class OpdaterBorger extends Component {
         super(props);
         let url = window.location.pathname.split("/");
         this.state = {
-            borger: null, cpr: url[2], FirstName: "", lastName: "Test", relativeFirstName: "",
+            borger: [], cpr: url[2], FirstName: "", lastName: "Test", relativeFirstName: "",
             relativeLastName: "", relativePhonenumber: 1, relativeRelation: "", relativeIsPrimary: true,
             startDate: null, reevaluationDate: null, plannedDischarge: null, prospectiveSituation: "test",
-            careNeed: "", purposeOfStay: "", currentStatus: "", numberOfReevlaluations: 0};
+            careNeed: "", purposeOfStay: "", currentStatus: "", numberOfReevlaluations: 0
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeCpr = this.handleChangeCpr.bind(this);
         this.handleChangeFirstname = this.handleChangeFirstname.bind(this);
@@ -32,7 +33,7 @@ export class OpdaterBorger extends Component {
         this.handleChangeRelativePhonenumber = this.handleChangeRelativePhonenumber.bind(this);
         this.handleChangeRelativeRelation = this.handleChangeRelativeRelation.bind(this);
         this.handleChangeProspectiveSituation = this.handleChangeProspectiveSituation.bind(this);
-        
+
     }
 
     componentDidMount() {
@@ -155,14 +156,14 @@ export class OpdaterBorger extends Component {
     handleChangeCareNeed(event) {
         this.setState({ careNeed: event.target.value })
     }
-    
-   
+
+
 
 
 
 
     render() {
-        
+
         return (
             <div>
                 <h1>Borger oplysninger</h1>
@@ -208,14 +209,14 @@ export class OpdaterBorger extends Component {
                             <option value="Lille">Lille</option>
                             <option value="Mellem">Mellem</option>
                             <option value="Stor">Stor</option>
-                            </select><br/>
-                            <label>Mål for ophold</label><br />
-                            <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
-                            <label>Nuværende status</label><br />
-                            <input type="text" onChange={this.handleChangeCurrentStatus} ></input><br />
-                            <label>Antal reevalueringer</label><br />
-                            <input type="number" onChange={this.handleChangeNumberOfReevaluations} ></input><br />
-                            <button onClick={this.handleSubmit}>Gem</button>
+                        </select><br />
+                        <label>Mål for ophold</label><br />
+                        <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
+                        <label>Nuværende status</label><br />
+                        <input type="text" onChange={this.handleChangeCurrentStatus} ></input><br />
+                        <label>Antal reevalueringer</label><br />
+                        <input type="number" onChange={this.handleChangeNumberOfReevaluations} ></input><br />
+                        <button onClick={this.handleSubmit}>Gem</button>
                     </form>
                 </div>
             </div>
@@ -234,9 +235,9 @@ export class OpdaterBorger extends Component {
         let decodedData = JSON.parse(decoded)
         this.id = decodedData['Role']*/
 
-        const response = await fetch('https://localhost:44356/api/citizen/'+this.state.cpr );
+        const response = await fetch('https://localhost:44356/rccsdb/citizen/' + this.state.cpr);
         const data = await response.json();
-        this.setState({ borger: data, loading: false});
+        this.setState({ borger: data, loading: false });
     }
 
 }
