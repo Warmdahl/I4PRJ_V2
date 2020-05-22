@@ -39,13 +39,13 @@ export class BorgerVisning extends Component {
         console.log(statushist);
 
         return (
-            <table>
+            <table >
                 <th>
                     <b>{borger.citizenName}</b> {borger.age} år {borger.cpr}
                 </th>
                 <th></th>
                 <th>
-                    <Link to={{pathname: "/OpdaterBorger/" + borger.cpr}} className="btn btn-primary" color="white">Opdater
+                    <Link to={{ pathname: "/OpdaterBorger/" + borger.cpr, state: { type: borger.careHomeType, name: borger.respiteCareHome }}} className="btn btn-primary" color="white">Opdater
                         Borger</Link>
                     <Link to={{pathname: "/NyRapport/" + borger.cpr}} className="btn btn-primary" color="white">Ny
                         statusrapport</Link>
@@ -182,7 +182,10 @@ export class BorgerVisning extends Component {
 
 
         return (
-            <div>
+            <div style={{
+                position: 'absolute', left: '50%',
+                transform: 'translate(-50%)'
+            }}>
                 <h1>Borger oplysninger</h1>
                 {contents}
             </div>

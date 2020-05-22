@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,20 +12,20 @@ using Xunit;
 
 namespace RCCS.DatabaseCitizenResidency.Unit.Tests
 {
-    /*
-     * Tests inspired from https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/testing?view=aspnetcore-3.1
-     * Written by Steve Smith and its contributors
-     */
-    public class CitizenInformationControllerUnitTests
+    public class CitizenListControllerUnitTests
     {
+        /*
+         * Tests inspired from https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/testing?view=aspnetcore-3.1
+         * Written by Steve Smith and its contributors and its contributors
+         */
         private readonly DbContextOptions<RCCSContext> _contextOptions;
 
         //Setup
-        public CitizenInformationControllerUnitTests()
+        public CitizenListControllerUnitTests()
         {
             _contextOptions = new DbContextOptionsBuilder<RCCSContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options;
+               .UseInMemoryDatabase(Guid.NewGuid().ToString())
+               .Options;
 
             using (var context = new RCCSContext(_contextOptions))
             {
@@ -35,6 +36,13 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests
                     FirstName = "Citizen",
                     LastName = "Citizensen",
                     CPR = 2905891233
+                };
+
+                var citizen1 = new Citizen
+                {
+                    FirstName = "Borger",
+                    LastName = "Borgersen",
+                    CPR = 1212194665
                 };
 
                 var relative = new Relative
@@ -56,6 +64,15 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests
                     Citizen = citizen
                 };
 
+                var ri1 = new ResidenceInformation
+                {
+                    StartDate = DateTime.Now,
+                    ReevaluationDate = DateTime.Now.AddDays(14),
+                    PlannedDischargeDate = new DateTime(2021, 09, 11),
+                    ProspectiveSituationStatusForCitizen = "Revurderingsbehov",
+                    Citizen = citizen1
+                };
+
                 var co = new CitizenOverview
                 {
                     PurposeOfStay = "Get better",
@@ -69,7 +86,6 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests
                     Address = "RespiteCareHome Vej 19",
                     Name = "Kærgården",
                     AvailableRespiteCareRooms = 1,
-                    RespiteCareRoomsTotal = 1,
                     PhoneNumber = 12345678,
                 };
 
@@ -82,9 +98,18 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests
                     Citizen = citizen
                 };
 
-                context.RespiteCareRooms.AddRange(respiteCareRoom);
+                var respiteCareRoom1 = new RespiteCareRoom
+                {
+                    Type = "Alm. plejebolig",
+                    RoomNumber = 2,
+                    IsAvailable = false,
+                    RespiteCareHome = respiteCareHome,
+                    Citizen = citizen1
+                };
+
+                context.RespiteCareRooms.AddRange(respiteCareRoom, respiteCareRoom1);
                 context.Relatives.Add(relative);
-                context.ResidenceInformations.Add(ri);
+                context.ResidenceInformations.AddRange(ri, ri1);
                 context.CitizenOverviews.Add(co);
                 context.Citizens.Add(citizen);
 
@@ -93,23 +118,22 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests
         }
 
         [Fact]
-        public async void GetCitizenInformation_ReturnsCitizenInformationViewModel()
+        public async void GetCitizenList_ReturnsCitizenList()
         {
             using (var context = new RCCSContext(_contextOptions))
             {
                 //Arrange
-                var citizenInformationController = new CitizenInformationController(context);
+                var citizenListController = new CitizenListController(context);
 
                 //Act
-                var citizenInformationViewModel = 
-                    await citizenInformationController
-                    .GetCitizenInformation("2905891233");
+                var citizenListViewModel = await citizenListController.GetCitizenList();
 
                 //Assert
-                Assert.NotNull(citizenInformationViewModel);
-                var actionResult = Assert.IsType<ActionResult<CitizenInformationViewModel>>(citizenInformationViewModel);
-                var civm = Assert.IsType<CitizenInformationViewModel>(actionResult.Value);
-                Assert.Equal("2905891233", civm.CPR);
+                Assert.NotNull(citizenListViewModel);
+                var actionResult = Assert.IsType<ActionResult<IEnumerable<CitizenListViewModel>>>(citizenListViewModel);
+                Assert.IsAssignableFrom<IEnumerable<CitizenListViewModel>>(actionResult.Value);
+                var citizenListViewModels = actionResult.Value.Count();
+                Assert.True(!citizenListViewModels.Equals(0));
             }
         }
     }

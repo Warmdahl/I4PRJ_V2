@@ -71,20 +71,21 @@ export class FindBorger extends Component {
                 <h1 id="tabelLabel">Borger liste</h1>
                 <p>Her kan der ses en liste over borgere i systemet.</p>
 
-
-                <input type="text"
-                       value={this.state.search}
-                       onChange={this.updateSearch.bind(this)}
-                       placeholder="Søg..."/>
-
-
-                {contents}
-
-            </div>
-
+                
+                    <input  type="text"
+                    value={this.state.search}
+                    onChange={this.updateSearch.bind(this)}
+                        placeholder="Søg..." />
+                  
+             
+                
+              
+                    {contents}
+                <Link to={{ pathname: "/" }} className="btn btn-primary">tilbage</Link>
+                </div>
+            
         );
     }
-
 
     async populateBorgerData() {
         const that = this;

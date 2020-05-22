@@ -34,13 +34,15 @@ namespace RCCS.DatabaseAPI
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddCors();
             services.AddDbContext<RCCSContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<RCCSUsersContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("UsersConnection")));
+
             services.AddControllers();
             services.AddCors();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -79,7 +81,7 @@ namespace RCCS.DatabaseAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RCCSUsersContext usersContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RCCSUsersContext usersContext, RCCSContext context)
         {
             if (env.IsDevelopment())
             {
@@ -93,6 +95,8 @@ namespace RCCS.DatabaseAPI
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "RCCS.DatabaseAPI V1");
                 c.RoutePrefix = string.Empty;
             });
+
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -115,7 +119,7 @@ namespace RCCS.DatabaseAPI
                 .AllowCredentials()
             );
 
-            app.UseHttpsRedirection();
+            
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -123,6 +127,8 @@ namespace RCCS.DatabaseAPI
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
             DataSeederUsers.SeedUsers(usersContext);
+
+            DataSeeder.SeedCitizenResidencyDb(context);
         }
     }
 }

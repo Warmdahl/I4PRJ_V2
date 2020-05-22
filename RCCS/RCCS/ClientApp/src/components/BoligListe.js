@@ -36,7 +36,7 @@ export class BoligListe extends React.Component {
                 </thead>
                 <tbody>
                 {boligliste.map(bolig =>
-                    <tr key={bolig.respiteCareHome}>
+                    <tr key={bolig.respiteCareHome + bolig.type}>
                         <td>{bolig.respiteCareHome}</td>
                         <td>{bolig.type}</td>
                         <td>{bolig.address}</td>
@@ -50,8 +50,10 @@ export class BoligListe extends React.Component {
 
                         </td>
                     </tr>
-                )}
+                    )}
+                   
                 </tbody>
+                
             </table>
         );
     }
@@ -68,6 +70,7 @@ export class BoligListe extends React.Component {
                 <h1 id="tabelLabel">Bolig liste</h1>
                 <p>Her kan der ses en liste over boliger i systemet.</p>
                 {contents}
+                <Link to={{ pathname: "/" }} className="btn btn-primary">tilbage</Link>
             </div>
         );
     }
