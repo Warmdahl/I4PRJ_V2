@@ -46,15 +46,24 @@ namespace RCCS.RCCSDbViewControllers
         [HttpPost]
         public async Task<ActionResult<ProgressReport>> PostProgressReport(CreateProgressReportViewModel cprvm)
         {
-            ProgressReport progressReport = new ProgressReport()
+            ProgressReport progressReport = new ProgressReport
             {
                 Date = DateTime.Now,
                 Title = cprvm.Title,
                 Report = cprvm.Report,
                 ResponsibleCaretaker = cprvm.ResponsibleCaretaker,
                 CitizenCPR = cprvm.CPR
-                
             };
+
+            var citizen = 
+                await _context.Citizens
+                    .Include(c => c.CitizenOverview)
+                    .FirstOrDefaultAsync(c => c.CPR == cprvm.CPR);
+
+            citizen.CitizenOverview.NumberOfReevaluations = citizen.CitizenOverview.NumberOfReevaluations + 1;
+
+            _context.Entry(citizen).State = EntityState.Modified;
+
 
             await _context.ProgressReports.AddAsync(progressReport);
 
