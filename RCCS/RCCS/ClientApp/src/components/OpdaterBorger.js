@@ -259,10 +259,6 @@ export class OpdaterBorger extends React.Component {
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Nuværende status</label><br />
-                                    <input type="text" onChange={this.handleChangeCurrentStatus} ></input><br />
-                                </td>
-                                <td>
 
                                 </td>
                             </tr>
