@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Linq;
 using RCCS.DatabaseUsers.Data;
 using RCCS.DatabaseUsers.Model.Entities;
@@ -72,4 +71,3 @@ namespace RCCS.DatabaseUsers.Data
         }
     }
 }
-
