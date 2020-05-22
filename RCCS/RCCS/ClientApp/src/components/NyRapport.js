@@ -54,7 +54,10 @@ export class NyRapport extends Component {
     render() {
 
         return (
-            <div>
+            <div style={{
+                position: 'absolute', left: '50%',
+                transform: 'translate(-50%)'
+            }}>
                 <h1>Skriv ny rapport</h1>
                 <table>
                     <tr>

@@ -33,7 +33,7 @@ export class BorgerVisning extends Component {
         console.log(statushist);
 
         return (
-            <table>
+            <table >
                 <th>
                     <b>{borger.citizenName}</b>  {borger.age} år {borger.cpr}
                 </th>
@@ -177,7 +177,10 @@ export class BorgerVisning extends Component {
 
 
         return (
-            <div>
+            <div style={{
+                position: 'absolute', left: '50%',
+                transform: 'translate(-50%)'
+            }}>
                 <h1>Borger oplysninger</h1>
                 {contents}
             </div>

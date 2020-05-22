@@ -41,7 +41,7 @@ export class FindBorger extends Component {
                         <td>{borger.timeUntilDischarge}</td>
                         <td>{borger.prospectiveSituationStatusForCitizen}</td>
                         <td>
-                            {<Link to={{ pathname: "./BorgerVisning/" + borger.cpr }} className="btn btn-primary" color="white">Vis {borger.citizenName}</Link>}
+                            <Link to={{ pathname: "./BorgerVisning/" + borger.cpr }} className="btn btn-primary" color="white">Vis {borger.citizenName}</Link>
                         </td>                        
                     </tr>
                 )}
@@ -71,7 +71,7 @@ export class FindBorger extends Component {
                 <p>Her kan der ses en liste over borgere i systemet.</p>
 
                 
-                    <input type="text"
+                    <input  type="text"
                     value={this.state.search}
                     onChange={this.updateSearch.bind(this)}
                         placeholder="Søg..." />
@@ -80,7 +80,7 @@ export class FindBorger extends Component {
                 
               
                     {contents}
-                
+                <Link to={{ pathname: "/" }} className="btn btn-primary">tilbage</Link>
                 </div>
             
         );
