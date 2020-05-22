@@ -41,7 +41,7 @@ namespace RCCS.DatabaseAPI
                 {
                     Title = "RCCS.DatabaseAPI",
                     Version = "v1",
-                    Description = "ASP.NET Core Web API for RCCS.Database"
+                    Description = "ASP.NET Core Web API for RCCS.DatabaseCitizenResidency and RCCS.DatabaseUsers"
                 });
             });
         }
