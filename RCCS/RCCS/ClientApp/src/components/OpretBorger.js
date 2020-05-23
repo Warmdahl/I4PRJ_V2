@@ -259,7 +259,7 @@ export class OpretBorger extends React.Component {
                                     </select><br />
                                 </td>
                             </tr>
-                            <label>Borgeroverblik og statushistorik:</label><br />
+                            <label>Borgeroverblik:</label><br />
                             <tr>
                                 <td>
                                     <label>Mål for ophold</label><br />
@@ -276,7 +276,7 @@ export class OpretBorger extends React.Component {
                             </tr>
                             <tr>
                                 <td>
-                                    <Link to={{ pathname: "/boligliste" }} className="btn btn-primary">tilbage</Link>
+                                    <Link to={{ pathname: "/boligliste" }} className="btn btn-primary">Tilbage</Link>
                                 </td>
                                 <td>
                                     <Button color="primary" onClick={this.handleSubmit}>Gem</Button>

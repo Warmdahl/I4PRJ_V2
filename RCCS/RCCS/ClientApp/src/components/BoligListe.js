@@ -26,11 +26,11 @@ export class BoligListe extends React.Component {
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Navn</th>
                     <th>Type</th>
-                    <th>Address</th>
-                    <th>Available Spaces</th>
-                    <th>Max Spaces</th>
+                    <th>Adresse</th>
+                    <th>Ledige pladser</th>
+                    <th>Maks antal pladser</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -70,7 +70,7 @@ export class BoligListe extends React.Component {
                 <h1 id="tabelLabel">Bolig liste</h1>
                 <p>Her kan der ses en liste over boliger i systemet.</p>
                 {contents}
-                <Link to={{ pathname: "/" }} className="btn btn-primary">tilbage</Link>
+                <Link to={{ pathname: "/" }} className="btn btn-primary">Tilbage</Link>
             </div>
         );
     }

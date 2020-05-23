@@ -25,9 +25,9 @@ export class FindBorger extends Component {
                 <thead>
                 <tr>
                     <th>Cpr-nr</th>
-                    <th>Name</th>
-                    <th>Carehome</th>
-                    <th>Time till discharge</th>
+                    <th>Navn</th>
+                    <th>Aflastningsplads</th>
+                    <th>Tid til udskrivning</th>
                     <th>Status</th>
                     <th>Vis Borger</th>
                 </tr>
@@ -81,7 +81,7 @@ export class FindBorger extends Component {
                 
               
                     {contents}
-                <Link to={{ pathname: "/" }} className="btn btn-primary">tilbage</Link>
+                <Link to={{ pathname: "/" }} className="btn btn-primary">Tilbage</Link>
                 </div>
             
         );

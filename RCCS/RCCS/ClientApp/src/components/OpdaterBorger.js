@@ -237,7 +237,7 @@ export class OpdaterBorger extends React.Component {
                             <label></label><br />
                             <tr>
                                 <td>
-                                    <label>Borgeroverblik og statushistorik:</label><br />
+                                    <label>Borgeroverblik:</label><br />
                                 </td>
                             </tr>
                             <tr>

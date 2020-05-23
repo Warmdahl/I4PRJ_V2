@@ -112,7 +112,7 @@ export class NyRapport extends Component {
                         </td>
                     </tr>
                     <tr>
-                        <Link to={{ pathname: "/BorgerVisning/" + this.state.borger.cpr }} className="btn btn-primary">tilbage</Link>
+                        <Link to={{ pathname: "/BorgerVisning/" + this.state.borger.cpr }} className="btn btn-primary">Tilbage</Link>
                     </tr>
                 </table>
 
