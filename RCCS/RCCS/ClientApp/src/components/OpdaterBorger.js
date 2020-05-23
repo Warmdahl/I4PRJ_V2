@@ -12,9 +12,9 @@ export class OpdaterBorger extends React.Component {
         super(props);
         let url = window.location.pathname.split("/");
         this.state = {
-            borger: [], cpr: url[2], type: props.type, home: props.home, FirstName: "", lastName: "Test", relativeFirstName: "",
+            borger: [], cpr: url[2], type: props.type, home: props.home, firstName: "", lastName: "", relativeFirstName: "",
             relativeLastName: "", relativePhonenumber: 1, relativeRelation: "", relativeIsPrimary: true,
-            startDate: null, reevaluationDate: null, plannedDischarge: null, prospectiveSituation: "test",
+            startDate: null, reevaluationDate: null, plannedDischarge: null, prospectiveSituation: "",
             careNeed: "", purposeOfStay: ""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,21 +41,21 @@ export class OpdaterBorger extends React.Component {
         }
         this.setState({
             type: temp,
-            home: this.props.location.state.name
-            //firstName: this.state.borger[0].firstName
+            home: this.props.location.state.name,
+            
         })
         
     }
 
     handleSubmit(event) {
-        //console.log(this.state.borger.firstName);
+        
         var url = "https://localhost:44356/rccsdb/createcitizen"
         event.preventDefault();
         fetch(url, {
             method: 'PUT',
             credentials: 'include',
             body: JSON.stringify({
-                "firstName": this.state.FirstName,
+                "firstName": this.state.firstName,
                 "lastName": this.state.lastName,
                 "cpr": Number(this.state.cpr),
                 "relativeFirstName": this.state.relativeFirstName,
@@ -83,7 +83,7 @@ export class OpdaterBorger extends React.Component {
     }
 
     handleChangeFirstname = (event) => {
-        this.setState({ FirstName: event.target.value });
+        this.setState({ firstName: event.target.value });
 
     }
 
@@ -165,7 +165,7 @@ export class OpdaterBorger extends React.Component {
                                     <input type="text" onChange={this.handleChangeFirstname} ></input><br />
                                 </td>
                                 <td>
-                                    <label>Efternavn {this.state.borger.lastName}</label><br />
+                                    <label>Efternavn: {this.state.borger.lastName}</label><br />
                                     <input type="text" onChange={this.handleChangeLastname} ></input><br />
                                 </td>
                             </tr>
@@ -245,7 +245,7 @@ export class OpdaterBorger extends React.Component {
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Mål for ophold</label><br />
+                                    <label>Mål for ophold: </label><br />
                                     <input type="text" onChange={this.handleChangePurposeOfStay} ></input><br />
                                 </td>
                                 <td>
@@ -278,7 +278,7 @@ export class OpdaterBorger extends React.Component {
     }
 
     async populateBorgerData() {
-        const response = await fetch('https://localhost:44356/rccsdb/CitizenInformation/' + this.state.cpr, {
+        const response = await fetch('https://localhost:44356/rccsdb/createcitizen/' + this.state.cpr, {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -288,8 +288,57 @@ export class OpdaterBorger extends React.Component {
         })
         const data = response.json();
         this.setState({ borger: data, loading: false });
-        //console.log(this.state.borger);
+        console.log(this.state.borger);
+        this.populateStateData();
         
     }
+
+    populateStateData() {
+
+
+        this.setState({
+            firstName: this.state.borger.firstName,
+            lastName: this.state.borger.lastName,
+
+            relativeFirstName: this.state.borger.relativeFirstName,
+            relativeLastName: this.state.borger.relativeLastName,
+            relativePhonenumber: Number(this.state.borger.phonenumber),
+            relativeRelation: this.state.borger.relation,
+            relativeIsPrimary: this.state.borger.isPrimary,
+
+            startDate: this.state.borger.startDate,
+            reevaluationDate: this.state.borger.reevaluationDate,
+            plannedDischarge: this.state.borger.plannedDischargeDate,
+            prospectiveSituation: this.state.borger.prospectiveSituationStatusForCitizen,
+            careNeed: this.state.borger.careNeed,
+            purposeOfStay: this.state.borger.purposeOfStay
+        });
+    }
+
+    //fetch fra citizeninformation
+
+    //populateStateData() {
+
+    //    const rel = this.state.borger.relatives[0].firstName;
+    //    console.log(rel);
+
+    //    this.setState({
+    //        firstName: this.state.borger.citizenName,
+    //        lastName: this.state.borger.citizenName,
+
+    //        //relativeFirstName: rel.firstName,
+    //        //relativeLastName: rel.lastName,
+    //        //relativePhonenumber: rel.phonenumber,
+    //        //relativeRelation: rel.relation,
+    //        //relativeIsPrimary: rel.isPrimary,
+
+    //        startDate: this.state.borger.dateOfAdmission,
+    //        reevaluationDate: this.state.borger.evaluationDate,
+    //        //plannedDischarge: ,
+    //        prospectiveSituation: this.state.borger.prospectiveSituationStatusForCitizen,
+    //        careNeed: this.state.borger.careNeed,
+    //        purposeOfStay: this.state.borger.purposeOfStay
+    //    });
+    //}
 
 }
