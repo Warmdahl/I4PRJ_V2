@@ -1,12 +1,15 @@
 ﻿import React from 'react';
 import { Route } from 'react-router-dom';
-import { getRole } from "../Security/GetRole";
+import { getRole } from "../GetRole";
 import Redirect from "react-router-dom/Redirect";
 
-function NursingStaffRoute({ component: Component, ...rest }) {
+export function CoordinatorRoute({ component: Component, ...rest }) {
     let role = getRole();
+    console.log('CoordinatorRoute.js says: Coordinator route enabled');
+    console.log("CoordinatorRoute.js says: Role is: " + role)
     switch (role) {
         case "Admin": {
+            console.log('CoordinatorRoute.js says: User is Admin. Access granted.');
             return (
                 <Route
                     {...rest}
@@ -16,10 +19,9 @@ function NursingStaffRoute({ component: Component, ...rest }) {
                         )
                     }
                 />);
-            break;
         }
         case "Coordinator": {
-            console.log('coordinator privateroute enabled');
+            console.log('CoordinatorRoute.js says: User is Coordinator. Access granted.');
             return (
                 <Route
                     {...rest}
@@ -28,35 +30,22 @@ function NursingStaffRoute({ component: Component, ...rest }) {
                             <Component {...props} />
                         )
                     }
-                />);
-            break;
-        }
-        case "NursingStaff": {
-            console.log('NursingStaff privateroute enabled');
-            return (
-                <Route
-                    {...rest}
-                    render={props =>
-                        (
-                            <Component {...props} />
-                        )
-                    }
-                />);
-            break;
+                />)
         }
         default: {
+            console.log('CoordinatorRoute.js says: User is not Authorized. Access NOT granted.');
+            console.log('Redirected to error page.');
             return (
                 <Route
                     {...rest}
                     render={props =>
                         (
-                            <Redirect to="log-in" />
+                            <Redirect to="NotAuthorized" />
                         )
                     }
-                />);
-            break;
+                />)
         }
     }
 }
 
-export default NursingStaffRoute;
+export default CoordinatorRoute;

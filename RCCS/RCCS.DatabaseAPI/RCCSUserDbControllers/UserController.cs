@@ -153,6 +153,7 @@ namespace RCCS.DatabaseAPI.RCCSDbControllers
             {
                     new Claim(ClaimTypes.Name, personaleId),
                     roleClaim,
+                    new Claim("personaleIdClearText", personaleId.ToString()),
                     new Claim("RoleClearText", role.ToString()),
                     new Claim("UserId", userId.ToString()),
                     new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString()),

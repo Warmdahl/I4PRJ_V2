@@ -24,6 +24,7 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CitizenListViewModel>>> GetCitizenList()
         {
+            Console.WriteLine("CitizenListController activated");
             List<CitizenListViewModel> clvmList = new List<CitizenListViewModel>();
 
             var citizens
