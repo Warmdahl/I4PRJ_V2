@@ -118,7 +118,7 @@ export class BorgerVisning extends Component {
                                         <b>Situation:</b>
                                     </td>
                                     <td>
-                                        {borger.purposeOfStay}
+                                        {borger.prospectiveSituationStatusForCitizen}
                                     </td>
                                 </tr>
                                 <tr>

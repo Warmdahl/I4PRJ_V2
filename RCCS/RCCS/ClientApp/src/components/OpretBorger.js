@@ -253,9 +253,9 @@ export class OpretBorger extends React.Component {
                                 <td>
                                     <label>Borgers fremtidige situation</label><br />
                                     <select onChange={this.handleChangeProspectiveSituation}>
-                                        <option value="I bedring">I bedring</option>
-                                        <option value="Uændret">Uændret</option>
-                                        <option value="I forværring">I forværring</option>
+                                    <option value="Afklaret">Afklaret</option>
+                                    <option value="Uafklaret">Uafklaret</option>
+                                    <option value="Revurderingsbehov">Revurderingsbehov</option>
                                     </select><br />
                                 </td>
                             </tr>
