@@ -185,7 +185,7 @@ export class OpdaterBorger extends React.Component {
                             <tr>
                                 <td>
                                     <label>Pårørendes telefonnummer</label><br />
-                                    <input type="number" onChange={this.handleChangeRelativePhonenumber}></input><br />
+                                    <input type="number" onChange={this.handleChangeRelativePhonenumber} min="10000000"></input><br />
                                 </td>
                                 <td>
                                     <label>Relation</label><br />
