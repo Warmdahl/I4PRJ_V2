@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Route } from 'react-router-dom';
-import { getRole } from "../GetRole";
+import { getRole } from "../SecurityHelperFunctions/GetRole";
 import Redirect from "react-router-dom/Redirect";
 
 export function CoordinatorRoute({ component: Component, ...rest }) {
