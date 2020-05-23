@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import '../CSS/StyleSheet.css';
 import { Button } from 'reactstrap';
 
-
-
 export class OpdaterBorger extends React.Component {
     static displayName = OpdaterBorger.name;
 
@@ -35,6 +33,7 @@ export class OpdaterBorger extends React.Component {
 
     componentDidMount() {
         this.populateBorgerData();
+
         let temp = 0
         if (this.props.location.state.type === "Demensbolig") {
             temp = 1
@@ -42,9 +41,7 @@ export class OpdaterBorger extends React.Component {
         this.setState({
             type: temp,
             home: this.props.location.state.name,
-            
         })
-        
     }
 
     handleSubmit(event) {
@@ -267,7 +264,7 @@ export class OpdaterBorger extends React.Component {
                                     <Button color="primary" onClick={this.handleSubmit}>Gem</Button>
                                 </td>
                                 <td>
-                                    <Link to={{ pathname: "/" }} className="btn btn-primary">tilbage</Link>
+                                    <Link to={{ pathname: "/" }} className="btn btn-primary">Tilbage</Link>
                                 </td>
                             </tr>
                         </table>
@@ -278,23 +275,25 @@ export class OpdaterBorger extends React.Component {
     }
 
     async populateBorgerData() {
-        const response = await fetch('https://localhost:44356/rccsdb/createcitizen/' + this.state.cpr, {
+        var data;
+        await fetch('https://localhost:44356/rccsdb/createcitizen/' + this.state.cpr, {
             method: 'GET',
             credentials: 'include',
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
                 'Content-Type': 'application/json'
             }
-        })
-        const data = response.json();
+        }).then(response => { data = response.json() });
+        //const data = response.json();
+
         this.setState({ borger: data, loading: false });
-        console.log(this.state.borger);
+
+        console.log(data);
         this.populateStateData();
-        
+        console.log(this.state.firstName);
     }
 
     populateStateData() {
-
 
         this.setState({
             firstName: this.state.borger.firstName,
@@ -314,31 +313,5 @@ export class OpdaterBorger extends React.Component {
             purposeOfStay: this.state.borger.purposeOfStay
         });
     }
-
-    //fetch fra citizeninformation
-
-    //populateStateData() {
-
-    //    const rel = this.state.borger.relatives[0].firstName;
-    //    console.log(rel);
-
-    //    this.setState({
-    //        firstName: this.state.borger.citizenName,
-    //        lastName: this.state.borger.citizenName,
-
-    //        //relativeFirstName: rel.firstName,
-    //        //relativeLastName: rel.lastName,
-    //        //relativePhonenumber: rel.phonenumber,
-    //        //relativeRelation: rel.relation,
-    //        //relativeIsPrimary: rel.isPrimary,
-
-    //        startDate: this.state.borger.dateOfAdmission,
-    //        reevaluationDate: this.state.borger.evaluationDate,
-    //        //plannedDischarge: ,
-    //        prospectiveSituation: this.state.borger.prospectiveSituationStatusForCitizen,
-    //        careNeed: this.state.borger.careNeed,
-    //        purposeOfStay: this.state.borger.purposeOfStay
-    //    });
-    //}
 
 }
