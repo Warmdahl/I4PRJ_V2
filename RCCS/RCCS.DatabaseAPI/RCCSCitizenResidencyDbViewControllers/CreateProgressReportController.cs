@@ -12,7 +12,7 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
 {
     [Route("rccsdb/[controller]")]
     [ApiController]
-    [Authorize("Admin, NursingStaff")]
+    [Authorize(Roles = "Admin, NursingStaff")]
     public class CreateProgressReportController : ControllerBase
     {
         private readonly RCCSContext _context;

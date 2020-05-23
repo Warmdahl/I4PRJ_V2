@@ -24,6 +24,7 @@ export class NyRapport extends Component {
         event.preventDefault();
         fetch(url1, {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify({
                 "cpr": Number(this.state.borger.cpr),
                 "title": this.state.Title,
@@ -31,6 +32,7 @@ export class NyRapport extends Component {
                 "responsibleCaretaker": this.state.ResponsibleCaretaker
             }),
             headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
                 'Content-Type': 'application/json'
             }
         }).then(responseJson => {
@@ -120,7 +122,14 @@ export class NyRapport extends Component {
 
 
     async populateBorgerData() {
-        const response = await fetch("https://localhost:44356/rccsdb/CreateProgressReport/" + this.state.cpr);
+        const response = await fetch('https://localhost:44356/rccsdb/CreateProgressReport/' + this.state.cpr, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
+                'Content-Type': 'application/json'
+            }
+        })
         const data = await response.json();
         this.setState({ borger: data, loading: false });
     }
