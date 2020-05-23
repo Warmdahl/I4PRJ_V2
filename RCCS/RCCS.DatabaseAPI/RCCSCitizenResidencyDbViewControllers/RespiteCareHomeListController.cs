@@ -23,7 +23,7 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<RespiteCareHomeListViewModel>> GetRespiteCareHomeList()
+        public async Task<ActionResult<IEnumerable<RespiteCareHomeListViewModel>>> GetRespiteCareHomeList()
         {
             List<RespiteCareHomeListViewModel> rchlvmList = new List<RespiteCareHomeListViewModel>();
 
