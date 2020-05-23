@@ -185,6 +185,47 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
             return NoContent();
         }
 
+        [HttpGet("{cpr}")]
+        public async Task<CreateCitizenViewModel> GetCreateCitizin(long cpr)
+        {
+            var citizen = await _context.Citizens
+                .AsNoTracking()
+                .Include(c => c.Relatives)
+                .Include(c => c.ResidenceInformation)
+                .Include(c => c.CitizenOverview)
+                .Include(c => c.RespiteCareRoom)
+                    .ThenInclude(c => c.RespiteCareHome)
+                .FirstOrDefaultAsync(c => c.CPR == cpr);
+
+            int temp = 0;
+            if (citizen.RespiteCareRoom.Type == "Demensbolig")
+            {
+                temp = 1;
+            };
+
+            CreateCitizenViewModel ccvm = new CreateCitizenViewModel
+            {
+                CPR = citizen.CPR,
+                FirstName = citizen.FirstName,
+                LastName = citizen.LastName,
+                RelativeFirstName = citizen.Relatives[0].FirstName,
+                RelativeLastName = citizen.Relatives[0].LastName,
+                PhoneNumber = citizen.Relatives[0].PhoneNumber,
+                Relation = citizen.Relatives[0].Relation,
+                IsPrimary = citizen.Relatives[0].IsPrimary,
+                StartDate = citizen.ResidenceInformation.StartDate,
+                ReevaluationDate = citizen.ResidenceInformation.ReevaluationDate,
+                PlannedDischargeDate = citizen.ResidenceInformation.PlannedDischargeDate,
+                ProspectiveSituationStatusForCitizen = citizen.ResidenceInformation.ProspectiveSituationStatusForCitizen,
+                CareNeed = citizen.CitizenOverview.CareNeed,
+                PurposeOfStay = citizen.CitizenOverview.PurposeOfStay,
+                RespiteCareHomeName = citizen.RespiteCareRoom.RespiteCareHomeName,
+                Type = temp
+            };
+
+            return ccvm;
+        }
+
     }
 
 
