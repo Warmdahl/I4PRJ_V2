@@ -15,6 +15,7 @@ export class OpdaterBorger extends React.Component {
             startDate: null, reevaluationDate: null, plannedDischarge: null, prospectiveSituation: "",
             careNeed: "", purposeOfStay: ""
         };
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeFirstname = this.handleChangeFirstname.bind(this);
         this.handleChangeLastname = this.handleChangeLastname.bind(this);
@@ -185,7 +186,7 @@ export class OpdaterBorger extends React.Component {
                             <tr>
                                 <td>
                                     <label>Pårørendes telefonnummer</label><br />
-                                    <input type="number" onChange={this.handleChangeRelativePhonenumber} min="10000000"></input><br />
+                                    <input type="number" onChange={this.handleChangeRelativePhonenumber} min="10000000" max="99999999"></input><br />
                                 </td>
                                 <td>
                                     <label>Relation</label><br />
@@ -288,9 +289,9 @@ export class OpdaterBorger extends React.Component {
 
         this.setState({ borger: data, loading: false });
 
-        console.log(data);
+        //console.log(data);
         this.populateStateData();
-        console.log(this.state.firstName);
+        //console.log(this.state.firstName);
     }
 
     populateStateData() {

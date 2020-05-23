@@ -187,7 +187,7 @@ export class OpretBorger extends React.Component {
                             <tr>
                                 <td>
                                     <label>Cpr-nummer</label><br />
-                                    <input type="number" onChange={this.handleChangeCpr} min="100000000" ></input><br />
+                                <input type="number" onChange={this.handleChangeCpr} min="100000000" max="3112999999"></input><br />
                                 </td>
                                 <td>
 
@@ -216,7 +216,7 @@ export class OpretBorger extends React.Component {
                             <tr>
                                 <td>
                                     <label>Pårørendes telefonnummer</label><br />
-                                    <input type="number" onChange={this.handleChangeRelativePhonenumber} min="10000000" ></input><br />
+                                <input type="number" onChange={this.handleChangeRelativePhonenumber} min="10000000" max="99999999"></input><br />
                                 </td>
                                 <td>
                                     <label>Relation</label><br />
