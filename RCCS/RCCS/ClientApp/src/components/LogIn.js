@@ -1,8 +1,6 @@
 ﻿import React, {Component} from 'react';
 import {Link, Redirect} from "react-router-dom";
-import {getRole} from "../Security/GetRole";
-import {LogInFunction} from "../Security/LogInFunction";
-import {getLogInState} from "../Security/getLogInState";
+import {getLogInState} from "../Security/SecurityHelperFunctions/getLogInState";
 
 export class LogIn extends Component {
     constructor(props) {

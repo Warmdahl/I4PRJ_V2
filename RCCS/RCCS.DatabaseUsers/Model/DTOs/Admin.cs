@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/*
+using System.ComponentModel.DataAnnotations;
 
 namespace RCCS.DatabaseUsers.Model.DTOs
 {
@@ -14,3 +15,4 @@ namespace RCCS.DatabaseUsers.Model.DTOs
         public string Password { get; set; }
     }
 }
+*/
