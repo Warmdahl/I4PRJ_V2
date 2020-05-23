@@ -21,7 +21,7 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests.Tests
 
         public CreateCitizenControllerUnitTests()
         {
-            _contextOptions = new CreateCitizenControllerDatabaseSetup().SetupDatabase();
+            _contextOptions = new CreateCitizenControllerUnitTestDatabaseSetup().SetupDatabase();
         }
 
         [Fact]

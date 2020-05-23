@@ -49,7 +49,7 @@ export class LogIn extends Component {
                         });
                     });
                 } else {
-                    alert("HTTP-Error: " + response.status);
+                    alert("Fejl i Brugernavn eller password, HTTP-Error: " + response.status);
                     console.log('Error - not logged in');
                     that.setState({
                         Error: true

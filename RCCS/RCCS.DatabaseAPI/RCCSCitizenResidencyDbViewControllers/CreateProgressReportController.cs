@@ -23,14 +23,13 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
         }
 
         [HttpGet("{cpr}")]
-        public async Task<ProgressReportViewModel> GetProgressReport(long cpr)
+        public async Task<ActionResult<ProgressReportViewModel>> GetProgressReport(long cpr)
         {
             var citizen = await _context.Citizens
                 .AsNoTracking()
                 .Include(c => c.RespiteCareRoom)
                 .Include(c => c.ResidenceInformation)
                 .FirstOrDefaultAsync(c => c.CPR == cpr);
-
 
             ProgressReportViewModel prvm = new ProgressReportViewModel
             {

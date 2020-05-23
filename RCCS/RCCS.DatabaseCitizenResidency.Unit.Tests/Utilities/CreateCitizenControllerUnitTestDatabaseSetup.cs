@@ -7,7 +7,7 @@ using RCCS.DatabaseCitizenResidency.Model;
 
 namespace RCCS.DatabaseCitizenResidency.Unit.Tests.Utilities
 {
-    internal class CreateCitizenControllerDatabaseSetup
+    internal class CreateCitizenControllerUnitTestDatabaseSetup
     {
         public DbContextOptions<RCCSContext> SetupDatabase()
         {
