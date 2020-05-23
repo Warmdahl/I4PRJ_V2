@@ -15,8 +15,9 @@ import {Register} from "./Register";
 import {ShowAllUsers} from "./ShowAllUsers";
 import {NotAuthorized} from "./NotAuthorized";
 import {LogOut} from "./LogOut";
+import {LogInFunction, getLogInState} from "../Security/SecurityHelperFunctions/getLogInState";
+import {getPersonaleId} from "../Security/SecurityHelperFunctions/GetPersonaleId";
 import {AdminRoute} from "../Security/Routes/AdminRoute";
-import {LogInFunction, getLogInState} from "../Security/getLogInState";
 import CoordinatorRoute from "../Security/Routes/CoordinatorRoute";
 import NursingStaffRoute from "../Security/Routes/NursingStaffRoute";
 
@@ -50,7 +51,7 @@ export class NavMenu extends Component {
     render() {
         let logInGreeting;
         if (this.state.userLoggedIn) {
-            logInGreeting = <span className="navbar-text float-left">Logged in</span>
+            logInGreeting = <span className="navbar-text float-left">Logged in som {getPersonaleId()}</span>
         } else {
             logInGreeting =
                 <span className="navbar-text float-left">Ikke logged in</span>
@@ -83,7 +84,7 @@ export class NavMenu extends Component {
                                                 Liste</NavLink>
                                         </NavItem>
                                         <NavItem>
-                                            <NavLink tag={Link} className="text-dark" to="/LogOut">Log Out </NavLink>
+                                            <NavLink tag={Link} className="text-dark" to="/LogOut">Log Ud</NavLink>
                                         </NavItem>
                                     </ul>
                                 </Collapse>

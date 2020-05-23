@@ -1,15 +1,15 @@
 export function getPersonaleId() {
     const jwt = localStorage.getItem('jwt')
-    let rolle;
+    let personaleId;
     try {
         if (jwt) {
             let jwtData = jwt.split('.')[1]
             let decoded = window.atob(jwtData)
             let decodedData = JSON.parse(decoded)
-            let personaleId =  (decodedData['personaleId'])
+            personaleId =  (decodedData['personaleIdClearText'])
+            return personaleId;
         }
     } catch (error) {
         console.log(error)
     }
-    return personaleId;
 }

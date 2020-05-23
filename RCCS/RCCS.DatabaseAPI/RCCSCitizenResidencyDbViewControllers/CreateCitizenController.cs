@@ -25,11 +25,16 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
         [HttpPost]
         public async Task<ActionResult<Citizen>> PostCitizen(CreateCitizenViewModel ccvm)
         {
+            if (ccvm.CPR == null)
+            {
+                return BadRequest("Please fill in CPR for citizen");
+            }
+
             Citizen citizen = new Citizen
             {
                 FirstName = ccvm.FirstName,
                 LastName = ccvm.LastName,
-                CPR = ccvm.CPR
+                CPR = (long) ccvm.CPR
             };
 
             Relative relative = new Relative
@@ -59,13 +64,22 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
                 Citizen = citizen
             };
 
-            var respiteCareHomeTemp = await _context.RespiteCareHomes.FirstOrDefaultAsync(rch => rch.Name == ccvm.RespiteCareHomeName);
+            //Will always be filled out in frontend 
+            if (ccvm.RespiteCareHomeName != null)
+            {
+                var respiteCareHomeTemp = await _context.RespiteCareHomes.FirstOrDefaultAsync(rch => rch.Name == ccvm.RespiteCareHomeName);
 
-            respiteCareHomeTemp.AvailableRespiteCareRooms = (respiteCareHomeTemp.AvailableRespiteCareRooms - 1);
-            _context.Entry(respiteCareHomeTemp).State = EntityState.Modified;
+                respiteCareHomeTemp.AvailableRespiteCareRooms = (respiteCareHomeTemp.AvailableRespiteCareRooms - 1);
+                _context.Entry(respiteCareHomeTemp).State = EntityState.Modified;
+            }
+            else
+            {
+                return BadRequest("Fill out which RespiteCareHome with an existing RespiteCareHome in database");
+            }
 
             var rcrType = "";
 
+            //Will always be filled out in frontend
             switch (ccvm.Type)
             {
                 case 0:
@@ -76,11 +90,17 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
                     break;
             }
 
+            
             var availableRespiteCareRoom =
                 await _context.RespiteCareRooms
                     .FirstOrDefaultAsync(rcr => (rcr.Type == rcrType)
                                                 && (rcr.IsAvailable)
                                                 && (rcr.RespiteCareHomeName == ccvm.RespiteCareHomeName));
+
+            if (availableRespiteCareRoom == null)
+            {
+                return BadRequest("No available RespiteCareRooms for chosen type and RespiteCareHome is not available");
+            }
 
             availableRespiteCareRoom.CitizenCPR = ccvm.CPR;
             availableRespiteCareRoom.IsAvailable = false;
@@ -109,16 +129,15 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
 
             return CreatedAtAction("PostCitizen", new { id = ccvm.CPR }, ccvm);
         }
+
         private bool CitizenExists(long id)
         {
             return _context.Citizens.Any(e => e.CPR == id);
         }
-
-
+        
         [HttpPut]
         public async Task<ActionResult<Citizen>> PutCitizen(CreateCitizenViewModel ccvm)
         {
-
             var existingCitizen = await _context.Citizens
                 .Include(c => c.Relatives)
                 .Include(c => c.ResidenceInformation)
@@ -156,7 +175,7 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
                 existingCitizen.CitizenOverview.CareNeed = ccvm.CareNeed;
                 existingCitizen.CitizenOverview.PurposeOfStay = ccvm.PurposeOfStay;
 
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             else
             {
