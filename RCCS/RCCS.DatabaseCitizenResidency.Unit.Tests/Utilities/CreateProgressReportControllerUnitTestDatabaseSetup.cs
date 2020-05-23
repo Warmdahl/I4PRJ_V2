@@ -7,11 +7,11 @@ using RCCS.DatabaseCitizenResidency.Model;
 
 namespace RCCS.DatabaseCitizenResidency.Unit.Tests.Utilities
 {
-    internal class RespiteCareHomeListUnitTestDatabaseSetup
+    internal class CreateProgressReportControllerUnitTestDatabaseSetup
     {
         internal DbContextOptions<RCCSContext> SetupDatabase()
         {
-            var contextOptions = new DbContextOptionsBuilder<RCCSContext>()
+            DbContextOptions<RCCSContext> contextOptions = new DbContextOptionsBuilder<RCCSContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
@@ -25,8 +25,15 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests.Utilities
                     LastName = "Citizensen",
                     CPR = 2905891233
                 };
-                
-                
+
+                var progressReport = new ProgressReport
+                {
+                    Citizen = citizen,
+                    Date = DateTime.Now,
+                    Report = "Citizen is well",
+                    ResponsibleCaretaker = "Caretaker Caretakersen",
+                    Title = "I bedring"
+                };
 
                 var relative = new Relative
                 {
@@ -60,14 +67,7 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests.Utilities
                     Address = "RespiteCareHome Vej 19",
                     Name = "Kærgården",
                     AvailableRespiteCareRooms = 1,
-                    PhoneNumber = 12345678,
-                };
-
-                var respiteCareHome1 = new RespiteCareHome
-                {
-                    Address = "RespiteCareHome Vej 19",
-                    Name = "Bakkedal",
-                    AvailableRespiteCareRooms = 1,
+                    RespiteCareRoomsTotal = 1,
                     PhoneNumber = 12345678,
                 };
 
@@ -80,30 +80,13 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests.Utilities
                     Citizen = citizen
                 };
 
-                var respiteCareRoom1 = new RespiteCareRoom
-                {
-                    Type = "Alm. plejebolig",
-                    RoomNumber = 2,
-                    IsAvailable = true,
-                    RespiteCareHome = respiteCareHome,
-                    Citizen = null
-                };
-
-                var respiteCareRoom2 = new RespiteCareRoom
-                {
-                    Type = "Demensbolig",
-                    RoomNumber = 1,
-                    IsAvailable = true,
-                    RespiteCareHome = respiteCareHome1,
-                    Citizen = null
-                };
-
-                context.RespiteCareRooms.AddRange(respiteCareRoom, respiteCareRoom1, respiteCareRoom2);
+                context.RespiteCareRooms.AddRange(respiteCareRoom);
                 context.Relatives.Add(relative);
                 context.ResidenceInformations.Add(ri);
                 context.CitizenOverviews.Add(co);
+                context.ProgressReports.Add(progressReport);
                 context.Citizens.Add(citizen);
-                
+
                 context.SaveChanges();
             }
 
