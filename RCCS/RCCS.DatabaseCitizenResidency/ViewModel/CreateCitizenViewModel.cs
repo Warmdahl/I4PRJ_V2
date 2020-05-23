@@ -7,7 +7,7 @@ namespace RCCS.DatabaseCitizenResidency.ViewModel
         //Citizen
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public long CPR { get; set; }
+        public long? CPR { get; set; }
 
         //Relative
         public string RelativeFirstName { get; set; }

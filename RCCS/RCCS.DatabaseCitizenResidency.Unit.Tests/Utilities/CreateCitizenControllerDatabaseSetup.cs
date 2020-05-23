@@ -1,32 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers;
 using RCCS.DatabaseCitizenResidency.Data;
 using RCCS.DatabaseCitizenResidency.Model;
-using RCCS.DatabaseCitizenResidency.ViewModel;
-using Xunit;
 
-namespace RCCS.DatabaseCitizenResidency.Unit.Tests
+namespace RCCS.DatabaseCitizenResidency.Unit.Tests.Utilities
 {
-    /*
-     * Tests inspired from https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/testing?view=aspnetcore-3.1
-     * Written by Steve Smith and its contributors
-     */
-    public class CitizenInformationControllerUnitTests
+    internal class CreateCitizenControllerDatabaseSetup
     {
-        private readonly DbContextOptions<RCCSContext> _contextOptions;
-
-        //Setup
-        public CitizenInformationControllerUnitTests()
+        public DbContextOptions<RCCSContext> SetupDatabase()
         {
-            _contextOptions = new DbContextOptionsBuilder<RCCSContext>()
+            var contextOptions = new DbContextOptionsBuilder<RCCSContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
-            using (var context = new RCCSContext(_contextOptions))
+            using (var context = new RCCSContext(contextOptions))
             {
                 context.Database.EnsureCreated();
 
@@ -69,7 +58,7 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests
                     Address = "RespiteCareHome Vej 19",
                     Name = "Kærgården",
                     AvailableRespiteCareRooms = 1,
-                    RespiteCareRoomsTotal = 1,
+                    RespiteCareRoomsTotal = 2,
                     PhoneNumber = 12345678,
                 };
 
@@ -82,7 +71,15 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests
                     Citizen = citizen
                 };
 
-                context.RespiteCareRooms.AddRange(respiteCareRoom);
+                var respiteCareRoom1 = new RespiteCareRoom
+                {
+                    Type = "Alm. plejebolig",
+                    RoomNumber = 2,
+                    IsAvailable = true,
+                    RespiteCareHome = respiteCareHome
+                };
+
+                context.RespiteCareRooms.AddRange(respiteCareRoom, respiteCareRoom1);
                 context.Relatives.Add(relative);
                 context.ResidenceInformations.Add(ri);
                 context.CitizenOverviews.Add(co);
@@ -90,27 +87,8 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests
 
                 context.SaveChanges();
             }
-        }
 
-        [Fact]
-        public async void GetCitizenInformation_ReturnsCitizenInformationViewModel()
-        {
-            using (var context = new RCCSContext(_contextOptions))
-            {
-                //Arrange
-                var citizenInformationController = new CitizenInformationController(context);
-
-                //Act
-                var citizenInformationViewModel = 
-                    await citizenInformationController
-                    .GetCitizenInformation("2905891233");
-
-                //Assert
-                Assert.NotNull(citizenInformationViewModel);
-                var actionResult = Assert.IsType<ActionResult<CitizenInformationViewModel>>(citizenInformationViewModel);
-                var civm = Assert.IsType<CitizenInformationViewModel>(actionResult.Value);
-                Assert.Equal("2905891233", civm.CPR);
-            }
+            return contextOptions;
         }
     }
 }
