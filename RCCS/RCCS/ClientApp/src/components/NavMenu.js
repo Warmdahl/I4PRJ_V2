@@ -97,7 +97,7 @@ export class NavMenu extends Component {
                         />
                         <NursingStaffRoute path='/FindBorger' component={FindBorger}/>
                         <CoordinatorRoute path='/BoligListe' component={BoligListe}/>
-                        <CoordinatorRoute path='/BorgerVisning' component={BorgerVisning}/>
+                        <NursingStaffRoute path='/BorgerVisning' component={BorgerVisning}/>
                         <NursingStaffRoute path='/NyRapport' component={NyRapport}/>
                         <NursingStaffRoute path='/OpdaterBorger' component={OpdaterBorger}/>
                         <CoordinatorRoute path='/OpretBorger' component={OpretBorger}/>
