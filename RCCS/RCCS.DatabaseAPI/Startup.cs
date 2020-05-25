@@ -100,16 +100,6 @@ namespace RCCS.DatabaseAPI
 
             app.UseRouting();
 
-            /* udkommenteret for at teste om en anden cors-konfiguration virkede bedre
-             app.UseCors(builder =>
-                builder.SetIsOriginAllowed(origin => _ = true)
-                    //.WithOrigins("https://localhost:44356") //SSL URL
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    //.AllowCredentials() Not allowed together with AllowOrigin
-                    .AllowAnyOrigin());
-                    */
-
             app.UseCors(x => x
                 //.AllowAnyOrigin() // Not allowed together with AllowCredential
                 //.WithOrigins("http://localhost:8080", "http://localhost:5000" )
