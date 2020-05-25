@@ -2,11 +2,13 @@
 {
     public class CitizenListViewModel
     {
+        //Citizen
         public string CPR { get; set; }
         public string CitizenName { get; set; }
+        //RespiteCareHome
         public string RespiteCareHome { get; set; }
-        //Calculated
-        public string TimeUntilDischarge { get; set; }
+        //ResidenceInformation
+        public string TimeUntilDischarge { get; set; } //Calculated
         public string ProspectiveSituationStatusForCitizen { get; set; }
     }
 }
