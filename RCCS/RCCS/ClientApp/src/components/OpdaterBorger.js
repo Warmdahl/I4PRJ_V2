@@ -34,15 +34,6 @@ export class OpdaterBorger extends React.Component {
 
     componentDidMount() {
         this.populateBorgerData();
-
-        let temp = 0
-        if (this.props.location.state.type === "Demensbolig") {
-            temp = 1
-        }
-        this.setState({
-            type: temp,
-            home: this.props.location.state.name,
-        })
     }
 
     handleSubmit(event) {
@@ -80,7 +71,7 @@ export class OpdaterBorger extends React.Component {
             .catch(error => { alert("fejl" + error); });
     }
 
-    handleChangeFirstname = (event) => {
+    handleChangeFirstname(event) {
         this.setState({ firstName: event.target.value });
 
     }
@@ -289,14 +280,22 @@ export class OpdaterBorger extends React.Component {
 
         this.setState({ borger: data, loading: false });
 
-        //console.log(data);
+        console.log(this.state.borger);
         this.populateStateData();
         //console.log(this.state.firstName);
     }
 
     populateStateData() {
 
+        let temp = 0
+        if (this.props.location.state.type === "Demensbolig") {
+            temp = 1
+        }
+
         this.setState({
+            type: temp,
+            home: this.props.location.state.name,
+
             firstName: this.state.borger.firstName,
             lastName: this.state.borger.lastName,
 
@@ -313,6 +312,10 @@ export class OpdaterBorger extends React.Component {
             careNeed: this.state.borger.careNeed,
             purposeOfStay: this.state.borger.purposeOfStay
         });
+
+
+
+
     }
 
 }

@@ -8,13 +8,6 @@ export class BoligListe extends React.Component {
     constructor(props) {
         super(props);
         this.state = {boligliste: [], loading: true, available: null};
-        this.func = this.func.bind(this);
-    }
-
-    func(e, a) {
-        if (a === 1) {
-            e.preventDefault();
-        }
     }
 
     componentDidMount() {

@@ -9,9 +9,9 @@ export class OpretBorger extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            type: props.type, home: null, FirstName: "", lastName: "Test", cpr: 1, relativeFirstName: "",
+            type: props.type, home: null, FirstName: "", lastName: "", cpr: 1, relativeFirstName: "",
             relativeLastName: "", relativePhonenumber: 1, relativeRelation: "", relativeIsPrimary: true,
-            startDate: null, reevaluationDate: null, plannedDischarge: null, prospectiveSituation: "test",
+            startDate: null, reevaluationDate: null, plannedDischarge: null, prospectiveSituation: "",
             careNeed: "", purposeOfStay: "", currentStatus: "", numberOfReevlaluations: 0
         };
         //this.se = this.se.bind(this);
