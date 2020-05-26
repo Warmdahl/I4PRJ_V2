@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import '../CSS/WelcomeStyleSheet.css'
 
 export class Welcome extends Component {
     static displayName = Welcome.name;

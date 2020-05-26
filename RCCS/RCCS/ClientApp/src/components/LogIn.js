@@ -1,5 +1,4 @@
 ﻿import React, {Component} from 'react';
-import {Link, Redirect} from "react-router-dom";
 import {getLogInState} from "../Security/SecurityHelperFunctions/getLogInState";
 
 export class LogIn extends Component {
@@ -42,7 +41,6 @@ export class LogIn extends Component {
                         console.log("json: " + data);
                         console.log("jwt: " + data["jwt"]);
                         localStorage.setItem("jwt", data["jwt"]);
-                        //end of test field
                         console.log('Logged in');
                         that.setState({
                             UserLoggedIn: true

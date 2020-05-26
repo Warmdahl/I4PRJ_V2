@@ -54,7 +54,6 @@ export class NyRapport extends Component {
     }
 
     render() {
-
         return (
             <div style={{
                 position: 'absolute', left: '50%',
@@ -133,5 +132,4 @@ export class NyRapport extends Component {
         const data = await response.json();
         this.setState({ borger: data, loading: false });
     }
-
 }

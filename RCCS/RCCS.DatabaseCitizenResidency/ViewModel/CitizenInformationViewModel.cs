@@ -32,15 +32,8 @@ namespace RCCS.DatabaseCitizenResidency.ViewModel
 
         //ProgressReport (ProgressReport.cs)
         public List<ProgressReport> ProgressReports { get; set; }
-        //public DateTime DateOfStatus { get; set; }
-        //public string StatusOverview { get; set; }
 
         //Next of kin (Relative.cs)
         public List<Relative> Relatives { get; set; }
-
-        //public bool NokRole { get; set; } //primary = true, secondary = false etc
-        //public string NokName { get; set; }
-        //public string NokRelation { get; set; } //Son, daughter, friend etc
-        //public int NokPhone { get; set; }
     }
 }

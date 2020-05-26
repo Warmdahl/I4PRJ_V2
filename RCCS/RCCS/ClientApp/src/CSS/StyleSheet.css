@@ -9,18 +9,6 @@ input {
     background-color: #f5f5f5;
 }
 
-
-
-
     input:invalid {
         border: red solid 1px;
     }
-
-    /*validityState.tooLong {
-        border: red solid 3px;
-    }
-
-validityState.tooShort {
-    border: red solid 3px;
-}*/
-

@@ -43,10 +43,6 @@ export class OpretBorger extends React.Component {
         console.log(temp)
     }
 
-    
-
-                  
-
     handleSubmit(event) {
         var url = "https://localhost:44356/rccsdb/createcitizen"
         event.preventDefault();
@@ -80,11 +76,6 @@ export class OpretBorger extends React.Component {
         })
             .catch(error => { alert("fejl" + error); });
     }
-
-    /*se(e) {
-        e.preventDefault();
-        alert(this.state.relativeIsPrimary)
-    }*/
 
     handleChangeFirstname = (event) => {
         this.setState({ FirstName: event.target.value });
@@ -161,7 +152,6 @@ export class OpretBorger extends React.Component {
     }
 
     render() {
-
         return (
             <div style={{
                 position: 'absolute', left: '50%',
@@ -284,10 +274,7 @@ export class OpretBorger extends React.Component {
                             </tr>
                         </table>
                     </form>
-                
-                
             </div>
         );
     }
-
 }

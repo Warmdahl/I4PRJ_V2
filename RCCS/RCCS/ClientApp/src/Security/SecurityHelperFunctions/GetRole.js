@@ -1,5 +1,4 @@
-﻿import { Component, createContext, useContext } from 'react';
-
+﻿
 export function getRole() {
     const jwt = localStorage.getItem('jwt')
     let rolle;
@@ -28,6 +27,3 @@ export function getRole() {
     }
     return rolle;
 }
-
-//export function setAuth(props) {
-//}

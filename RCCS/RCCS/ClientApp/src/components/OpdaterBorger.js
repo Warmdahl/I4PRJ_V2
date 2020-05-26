@@ -112,9 +112,7 @@ export class OpdaterBorger extends React.Component {
         } else {
             b = false
         }
-
         this.setState({ relativeIsPrimary: b });
-
     }
 
     handleChangeRelativePhonenumber(event) {
@@ -134,7 +132,6 @@ export class OpdaterBorger extends React.Component {
     }
 
     render() {
-
         return (
             <div style={{
                 position: 'absolute', left: '50%',
@@ -276,13 +273,11 @@ export class OpdaterBorger extends React.Component {
                 'Content-Type': 'application/json'
             }
         }).then(response => { data = response.json() });
-        //const data = response.json();
 
         this.setState({ borger: data, loading: false });
 
         console.log(this.state.borger);
         this.populateStateData();
-        //console.log(this.state.firstName);
     }
 
     populateStateData() {
@@ -312,10 +307,5 @@ export class OpdaterBorger extends React.Component {
             careNeed: this.state.borger.careNeed,
             purposeOfStay: this.state.borger.purposeOfStay
         });
-
-
-
-
     }
-
 }

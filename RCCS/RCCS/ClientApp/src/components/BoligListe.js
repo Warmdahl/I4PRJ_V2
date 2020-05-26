@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
-import {Button} from 'reactstrap';
 
 export class BoligListe extends React.Component {
     static displayName = BoligListe.name;
@@ -36,27 +35,21 @@ export class BoligListe extends React.Component {
                         <td>{bolig.availableRespiteCareRooms}</td>
                         <td>{bolig.respiteCareRoomsTotal}</td>
                         <td>
-
                             <Link
                                 to={{pathname: "./opretborger", state: {type: bolig.type, name: bolig.respiteCareHome}}}
                                 className="btn btn-primary" color="white">Opret Borger</Link>
-
                         </td>
                     </tr>
                     )}
-                   
                 </tbody>
-                
             </table>
         );
     }
-
 
     render() {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
             : BoligListe.renderBoligTable(this.state.boligliste, this.state.available);
-
 
         return (
             <div>
@@ -93,5 +86,3 @@ export class BoligListe extends React.Component {
         });
     }
 }
-
-

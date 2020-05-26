@@ -99,47 +99,7 @@ namespace RCCS.DatabaseAPI.RCCSDbControllers
             ModelState.AddModelError(string.Empty, "Invalid login");
             return BadRequest(ModelState);
         }
-
-        /*
-        /// <summary>
-        /// Use to change the password.
-        /// </summary>
-        /// <param name="login"></param>
-        /// <returns></returns>
-        [HttpPut("Password")]
-        public async Task<ActionResult<Token>> ChangePassword([FromBody] Login login)
-        {
-            if (login == null)
-            {
-                ModelState.AddModelError(string.Empty, "Data missing");
-                return BadRequest(ModelState);
-            }
-
-            login.PersonaleId = login.PersonaleId.ToLowerInvariant();
-            var user = await _context.Users.Where(u => u.PersonaleId == login.PersonaleId)
-                .FirstOrDefaultAsync().ConfigureAwait(false);
-
-            if (user == null)
-            {
-                ModelState.AddModelError("email", "Not found!");
-                return BadRequest(ModelState);
-            }
-
-            var validPwd = Verify(login.OldPassword, user.PwHash);
-            if (validPwd)
-            {
-                user.PwHash = HashPassword(login.Password, _appSettings.BcryptWorkfactor);
-                await _context.SaveChangesAsync().ConfigureAwait(false);
-                return Ok();
-            }
-            else
-            {
-                ModelState.AddModelError("oldPassword", "No match");
-                return BadRequest(ModelState);
-            }
-        }
-        */
-
+        
         private string GenerateToken(string personaleId, long userId, Role role)
         {
             Claim roleClaim = role switch

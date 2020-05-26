@@ -24,7 +24,6 @@ export class BorgerVisning extends Component {
         this.populateBorgerData();
     }
 
-
     static borgertabel(borger, cpr, statusDate, admissiondate, evaluationdate) {
         const relatives = borger.relatives;
         const statushist = borger.progressReports;
@@ -55,13 +54,11 @@ export class BorgerVisning extends Component {
                         <table>
                             <tr>
                                 Information
-
                             </tr>
                             <tr>
                                 <b>
                                     Aflastingssted:
                                 </b>
-
                             </tr>
                             <tr>
                                 {borger.respiteCareHome}
@@ -180,7 +177,6 @@ export class BorgerVisning extends Component {
             ? <p><em>Loading...</em></p>
             : BorgerVisning.borgertabel(this.state.borger, this.state.cpr, this.state.statusDate, this.state.admissiondate, this.state.evaluationdate);
 
-
         return (
             <div style={{
                 position: 'absolute', left: '50%',
@@ -191,7 +187,6 @@ export class BorgerVisning extends Component {
             </div>
         );
     }
-
 
     async populateBorgerData() {
         const response = await fetch("https://localhost:44356/rccsdb/CitizenInformation/" + this.state.cpr, {

@@ -11,13 +11,10 @@ import {BorgerVisning} from './BorgerVisning';
 import {NyRapport} from './NyRapport';
 import {OpdaterBorger} from './OpdaterBorger';
 import {OpretBorger} from './OpretBorger';
-import {Register} from "./Register";
-import {ShowAllUsers} from "./ShowAllUsers";
 import {NotAuthorized} from "./NotAuthorized";
 import {LogOut} from "./LogOut";
-import {LogInFunction, getLogInState} from "../Security/SecurityHelperFunctions/getLogInState";
+import {getLogInState} from "../Security/SecurityHelperFunctions/getLogInState";
 import {getPersonaleId} from "../Security/SecurityHelperFunctions/GetPersonaleId";
-import {AdminRoute} from "../Security/Routes/AdminRoute";
 import CoordinatorRoute from "../Security/Routes/CoordinatorRoute";
 import NursingStaffRoute from "../Security/Routes/NursingStaffRoute";
 
@@ -39,14 +36,11 @@ export class NavMenu extends Component {
         console.log("NavMenu.js says: componentDidMount and this.state.userLoggedIn is: " + this.state.userLoggedIn)
     }
 
-
     toggleNavbar() {
         this.setState({
             collapsed: !this.state.collapsed
         });
     }
-
-
 
     render() {
         let logInGreeting;

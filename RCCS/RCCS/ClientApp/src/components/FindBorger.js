@@ -1,6 +1,5 @@
 ﻿import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Button} from "reactstrap";
 import '../CSS/StyleSheet.css'
 
 export class FindBorger extends Component {
@@ -61,7 +60,6 @@ export class FindBorger extends Component {
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
             : FindBorger.renderFindBorgerTable(filteredborgers);
-        //this.state.findborgers
 
         return (
 
@@ -71,20 +69,15 @@ export class FindBorger extends Component {
                 <h1 id="tabelLabel">Borger liste</h1>
                 <p>Her kan der ses en liste over borgere i systemet.</p>
 
-                
                     <input  type="text"
                     value={this.state.search}
                     onChange={this.updateSearch.bind(this)}
                         placeholder="Søg..." />
-                  
-             
-                
-              
+
                     {contents}
                 <Link to={{ pathname: "/" }} className="btn btn-primary">Tilbage</Link>
                 </div>
-            
-        );
+            );
     }
 
     async populateBorgerData() {

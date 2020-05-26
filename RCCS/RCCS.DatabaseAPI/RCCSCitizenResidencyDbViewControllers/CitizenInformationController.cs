@@ -74,19 +74,6 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
             var ageintime = currentDate.Date - birthdate;
             int age = (int) ((ageintime.Days / 365.25) - 0.5);
 
-
-            //Managing dates
-           // DateTime DateOfAdmission = citizen.ResidenceInformation.StartDate.Date;
-           // var dateOnlyDateOfAdmissionDate = DateOfAdmission.ToShortDateString();
-
-           // DateTime EvaluationDate = citizen.ResidenceInformation.ReevaluationDate.Date;
-           // var dateOnlyEvaluationDate = EvaluationDate.ToShortDateString();
-
-
-            //looking a relatives
-
-
-
             //Building the citizen
             citizenInfo.CPR = citizen.CPR.ToString();
             citizenInfo.CitizenName = citizen.FirstName + " " + citizen.LastName;
