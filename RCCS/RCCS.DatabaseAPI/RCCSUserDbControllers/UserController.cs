@@ -33,12 +33,12 @@ namespace RCCS.DatabaseAPI.RCCSDbControllers
         }
 
 
-        // POST: api/user/login
+        // POST: api/User/login
         [HttpPost("login"), AllowAnonymous]
         public async Task<ActionResult<Token>> Login([FromBody] Login login)
         {
             Console.WriteLine("LoginController activated");
-            if (login != null) //check if email, username and password were entered
+            if (login != null) //check if personaleId and password were entered
             {
                 //find user by personaleId
                 login.PersonaleId = login.PersonaleId.ToLowerInvariant();

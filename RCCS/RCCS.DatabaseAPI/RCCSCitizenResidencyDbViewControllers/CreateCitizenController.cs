@@ -186,7 +186,7 @@ namespace RCCS.DatabaseAPI.RCCSCitizenResidencyDbViewControllers
         }
 
         [HttpGet("{cpr}")]
-        public async Task<CreateCitizenViewModel> GetCreateCitizin(long cpr)
+        public async Task<ActionResult<CreateCitizenViewModel>> GetCreateCitizin(long cpr)
         {
             var citizen = await _context.Citizens
                 .AsNoTracking()

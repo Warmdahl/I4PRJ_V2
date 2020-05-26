@@ -337,5 +337,29 @@ namespace RCCS.DatabaseCitizenResidency.Unit.Tests.Tests
                 Assert.IsType<NotFoundResult>(actionResult.Result);
             }
         }
+
+        [Fact]
+        public async void GetCreateCitizin_GetsCreateCitizenViewModel()
+        {
+            using (var context = new RCCSContext(_contextOptions))
+            {
+                //Arrange
+                var createCitizenController = new CreateCitizenController(context);
+                var id = 2905891233;
+
+                //Act
+                var createCitizenViewModel = await createCitizenController.GetCreateCitizin(id);
+
+                //Assert
+                Assert.NotNull(createCitizenViewModel);
+                var actionResult = Assert.IsType<ActionResult<CreateCitizenViewModel>>(createCitizenViewModel);
+                var ccvm = Assert.IsType<CreateCitizenViewModel>(actionResult.Value);
+
+                Assert.Equal(id, ccvm.CPR);
+                Assert.Equal("Citizen Citizensen", ccvm.FirstName + " " + ccvm.LastName);
+                Assert.Equal("Kærgården", ccvm.RespiteCareHomeName);
+                Assert.Equal(new DateTime(2021, 01, 29), ccvm.PlannedDischargeDate);
+            }
+        }
     }
 }

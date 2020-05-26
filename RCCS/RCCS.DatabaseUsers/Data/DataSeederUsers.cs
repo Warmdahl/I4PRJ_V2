@@ -19,24 +19,33 @@ namespace RCCS.DatabaseUsers.Data
                 SeedAdmins(context);
             if (!context.Coordinators.Any())
                 SeedCoordinators(context);
+            if (!context.NursingStaffs.Any())
+                SeedNursingStaffs(context);
         }
 
         static void SeedAccounts(RCCSUsersContext context)
         {
             context.Users.AddRange(
-                // Seed admin
-                new EfUser
-                {
-                    PersonaleId = "Admin",
-                    PwHash = HashPassword("Admin", BcryptWorkfactor),
-                    Role = Role.Admin
-                },
+            // Seed admin
+            new EfUser
+            {
+                PersonaleId = "Admin",
+                PwHash = HashPassword("Admin", BcryptWorkfactor),
+                Role = Role.Admin
+            },
             // Seed Coordinator
             new EfUser
             {
                 PersonaleId = "Coordinator",
                 PwHash = HashPassword("Coordinator", BcryptWorkfactor),
                 Role = Role.Coordinator
+            },
+            // Seed NursingStaff
+            new EfUser
+            {
+                PersonaleId = "NursingStaff",
+                PwHash = HashPassword("NursingStaff", BcryptWorkfactor),
+                Role = Role.NursingStaff
             }
             // TO DO: Seed other users
             );
@@ -65,6 +74,19 @@ namespace RCCS.DatabaseUsers.Data
                     PersonaleId = "Coordinator",
                     FirstName = "CoordinatorFirstName",
                     LastName = "CoordinatorLastName",
+
+                });
+            context.SaveChanges();
+        }
+        static void SeedNursingStaffs(RCCSUsersContext context)
+        {
+            context.NursingStaffs.Add(
+                new EfNursingStaff()
+                {
+                    EfUserId = 3,
+                    PersonaleId = "NursingStaff",
+                    FirstName = "NursingStaffFirstName",
+                    LastName = "NursingStaffLastName",
 
                 });
             context.SaveChanges();

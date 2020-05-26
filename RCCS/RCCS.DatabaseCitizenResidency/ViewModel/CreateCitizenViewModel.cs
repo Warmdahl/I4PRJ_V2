@@ -26,7 +26,7 @@ namespace RCCS.DatabaseCitizenResidency.ViewModel
         public string CareNeed { get; set; }
         public string PurposeOfStay { get; set; }
 
-        //RespiteCareHome
+        //RespiteCareRoom
         public string RespiteCareHomeName { get; set; }
         public int Type { get; set; }
     }
